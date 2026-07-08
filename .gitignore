@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Data files generated locally
+data/
+*.csv
+*.parquet
+*.json
+
+# Environment and secrets
+.env
+*.secret
+secrets.*
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraform.lock.hcl
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.vscode/
+
