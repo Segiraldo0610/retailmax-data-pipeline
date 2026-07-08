@@ -1,0 +1,12 @@
+deploy_with_terraform = false
+
+workspace_name = "ws_retailmax_data_dev"
+lakehouse_name = "lh_retailmax_medallion"
+
+# Fabric Trial capacity is not supported by the Terraform provider for capacity provisioning.
+# If I later use a compatible Azure Fabric capacity, I can set its ID here and change
+# deploy_with_terraform to true.
+fabric_capacity_id = ""
+
+enable_lakehouse_schemas       = true
+skip_capacity_state_validation = false

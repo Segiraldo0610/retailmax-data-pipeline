@@ -62,6 +62,8 @@ Infraestructura como Código, o IaC, consiste en definir recursos cloud mediante
 
 Para este proyecto usaré Terraform como estrategia principal de IaC. Esta decisión busca que la infraestructura no dependa únicamente de pasos manuales. En caso de que el trial de Fabric limite alguna automatización, documentaré la configuración realizada, la razón del supuesto y las evidencias necesarias.
 
+En la fase inicial identifiqué una limitación relevante: la capacidad Fabric Trial puede restringir algunas acciones de aprovisionamiento mediante el proveedor de Terraform. Por eso dejé una estructura Terraform preparada en `/infra`, pero configurada por defecto para no desplegar recursos hasta contar con una capacidad compatible. Esta decisión evita forzar un despliegue inestable y mantiene la infraestructura documentada de forma reproducible.
+
 ## Supuestos iniciales
 
 Durante el desarrollo voy a documentar los supuestos que tome para evitar ambigüedades. Hasta este momento considero los siguientes:
@@ -69,6 +71,7 @@ Durante el desarrollo voy a documentar los supuestos que tome para evitar ambig�
 - seleccioné un solo escenario de negocio, como indica el enunciado;
 - la solución debe ser clara, reproducible y defendible, sin sobreingeniería;
 - si una herramienta gratuita o trial tiene limitaciones, las documentaré junto con la evidencia de lo implementado;
+- si Fabric Trial no permite automatizar una configuración específica por Terraform, dejaré el recurso creado desde la interfaz, su justificación y el equivalente esperado en IaC;
 - si reduzco volúmenes durante pruebas locales, dejaré la generación parametrizada para poder escalar a los volúmenes solicitados;
 - la documentación se construirá durante todo el proyecto y no solo al final.
 
