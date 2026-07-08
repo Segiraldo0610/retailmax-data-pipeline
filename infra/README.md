@@ -53,5 +53,5 @@ deploy_with_terraform = true
 
 ## Supuesto documentado
 
-Tomo como supuesto que el ambiente de prueba puede limitar algunas acciones de aprovisionamiento por codigo. Cuando eso ocurra, lo documento en el README y dejo evidencias de los recursos creados manualmente desde la interfaz de Fabric.
+Tomo como supuesto que el ambiente de prueba puede limitar algunas acciones de aprovisionamiento por codigo. Cuando eso ocurra, lo documento en el README general del proyecto y dejo evidencias de los recursos creados manualmente desde la interfaz de Fabric.
 

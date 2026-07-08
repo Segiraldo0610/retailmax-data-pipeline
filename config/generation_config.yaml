@@ -4,10 +4,23 @@
 project:
   scenario: retail_ecommerce
   random_seed: 20260707
+  default_profile: dev
 
 date_range:
   start_date: "2025-07-01"
   end_date: "2026-06-30"
+
+profiles:
+  dev:
+    MSTR_ARTICULOS: 500
+    MSTR_PROVEEDORES: 80
+    MSTR_TIENDAS: 30
+    CRM_MIEMBROS: 3000
+    TRANS_VENTAS: 30000
+    INV_STOCK_DIARIO: 40000
+    POST_DEVOLUCIONES: 1500
+  full:
+    use_target_rows: true
 
 tables:
   MSTR_ARTICULOS:
@@ -28,4 +41,3 @@ tables:
 quality:
   controlled_null_rate: 0.05
   include_intentional_anomalies: true
-

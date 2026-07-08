@@ -95,23 +95,27 @@ Las tecnologías iniciales del proyecto son:
 
 ## Estructura inicial del repositorio
 
-La estructura propuesta para el repositorio es:
+La estructura base del repositorio es:
 
 ```text
 /infra
+  README.md
 /data-generation
+  README_DATA_GENERATION.md
 /pipelines
   /bronze
   /silver
   /gold
 /orchestration
 /docs
+  DIARIO_TECNICO.md
+  modelo_datos_source.md
 /config
 README.md
 CHANGELOG.md
 ```
 
-Esta estructura sigue la recomendación del enunciado y separa las responsabilidades principales del proyecto.
+El `README.md` principal se mantiene en la raíz del repositorio porque el enunciado lo solicita como documento completo de la solución. La carpeta `docs/` contiene la documentación ampliada, incluyendo el diario técnico, el modelo de datos fuente, el catálogo, los diagramas y las evidencias que se agreguen durante el desarrollo. La carpeta `/infra` conserva su propio `README.md` porque allí deben quedar las instrucciones de despliegue de IaC.
 
 ## Estado actual
 
