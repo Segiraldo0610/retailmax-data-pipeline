@@ -4,7 +4,7 @@
 
 - Ajusté la estructura del repositorio con base en la estructura recomendada por el enunciado.
 - Dejé el `README.md` principal en la raíz del proyecto y mantuve documentación ampliada dentro de `/docs`.
-- Agregué el diario técnico como documento complementario en `/docs/DIARIO_TECNICO.md`.
+- Agregué mi diario técnico como documento complementario en `/docs/DIARIO_TECNICO.md`.
 - Incorporé el modelo inicial de datos fuente en `/docs/modelo_datos_source.md`.
 - Preparé los scripts de generación, carga y validación de datos sintéticos en `/data-generation`.
 - Cambié la convención de nombres del código propio a español para mantener coherencia con mi forma de trabajo.
@@ -19,4 +19,5 @@
 - Definí Microsoft Fabric como plataforma propuesta.
 - Definí Terraform como estrategia principal para IaC, considerando el proveedor de Microsoft Fabric.
 - Creé la estructura inicial del repositorio.
+- Realice la instalación de todas las herramientas necesarias para el desarrollo del proyecto
 

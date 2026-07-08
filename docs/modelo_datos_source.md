@@ -4,7 +4,7 @@ Este documento describe el modelo relacional inicial que uso para simular la ope
 
 ## Convencion de nombres
 
-Para el codigo propio uso nombres en espanol, especialmente en funciones, variables de control y argumentos de ejecucion. En cambio, en las tablas fuente mantengo nombres fisicos de columnas en ingles, como `sale_id`, `product_id`, `store_id` y `net_amount`.
+Para el codigo propio uso nombres en español, especialmente en funciones, variables de control y argumentos de ejecucion. En cambio, en las tablas fuente mantengo nombres fisicos de columnas en ingles, como `sale_id`, `product_id`, `store_id` y `net_amount`.
 
 Tome esta decision porque esas columnas representan el contrato tecnico de la fuente simulada. En un proyecto real es comun recibir sistemas origen con nombres en ingles, y lo importante para el pipeline es documentarlos, validarlos y transformarlos de forma consistente.
 
