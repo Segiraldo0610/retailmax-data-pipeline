@@ -121,6 +121,17 @@ CHANGELOG.md
 
 El `README.md` principal se mantiene en la raíz del repositorio porque el enunciado lo solicita como documento completo de la solución. La carpeta `docs/` contiene la documentación ampliada, incluyendo el diario técnico, el modelo de datos fuente, el catálogo, los diagramas y las evidencias que se agreguen durante el desarrollo. La carpeta `/infra` conserva su propio `README.md` porque allí deben quedar las instrucciones de despliegue de IaC.
 
+## Archivos de soporte del repositorio
+
+Además de las carpetas recomendadas por el enunciado, mantengo algunos archivos de soporte porque ayudan a que la solución sea reproducible y segura:
+
+- `CHANGELOG.md`: lo conservo porque el enunciado lo solicita como historial de cambios con fecha y descripción.
+- `.gitignore`: evita versionar archivos sensibles o generados localmente, como `.env`, `data/`, `.venv/`, `.terraform/` y archivos `tfstate`.
+- `.env.example`: documenta las variables necesarias para ejecutar el proyecto sin exponer credenciales reales.
+- `requirements.txt`: permite instalar las dependencias de Python de forma reproducible.
+- `docker-compose.yml`: define la base PostgreSQL local usada como fuente transaccional simulada.
+- `infra/.terraform.lock.hcl`: fija las versiones del proveedor de Terraform para que futuras ejecuciones usen la misma selección de dependencias. No contiene estado ni credenciales.
+
 ## Estado actual
 
 El proyecto se encuentra en fase inicial de implementación. Ya están definidos el escenario de negocio, la plataforma principal, la estrategia de IaC y la estructura base del repositorio. También quedó configurada una base PostgreSQL local en Docker para simular la fuente transaccional inicial.
