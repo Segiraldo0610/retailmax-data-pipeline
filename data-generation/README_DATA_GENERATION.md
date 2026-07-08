@@ -2,7 +2,13 @@
 
 En esta carpeta estan los scripts para generar datos sinteticos del escenario RetailMax y cargarlos en PostgreSQL.
 
-La generacion usa una semilla fija definida en `config/generation_config.yaml`, por lo que los resultados son reproducibles.
+La generacion usa una semilla fija definida en `config/generacion_datos.yaml`, por lo que los resultados son reproducibles.
+
+## Convencion de nombres
+
+En los scripts propios uso nombres en espanol para funciones, variables principales y argumentos de consola, porque es la forma en la que acostumbro escribir codigo y me facilita explicar la logica paso a paso.
+
+Mantengo los nombres fisicos de tablas y columnas en ingles, por ejemplo `sale_id`, `product_id` y `net_amount`, porque los trato como el contrato tecnico de la fuente transaccional simulada. Esta convencion tambien facilita las consultas SQL y evita cambiar el modelo de datos cada vez que ajuste la logica interna de los scripts.
 
 ## Tablas generadas
 
@@ -36,19 +42,19 @@ pip install -r requirements.txt
 Generar datos en modo desarrollo:
 
 ```powershell
-python data-generation/generate_retail_data.py --profile dev
+python data-generation/generar_datos_retail.py --perfil dev
 ```
 
 Cargar datos en PostgreSQL:
 
 ```powershell
-python data-generation/load_to_postgres.py
+python data-generation/cargar_a_postgres.py
 ```
 
 Validar conteos y reglas basicas:
 
 ```powershell
-python data-generation/validate_source.py
+python data-generation/validar_fuente.py
 ```
 
 ## Salidas locales
@@ -67,4 +73,3 @@ Esta carpeta no se versiona porque puede contener archivos grandes. El repositor
 - Cargo las tablas en el esquema `source`.
 - Uso nombres fisicos en minuscula para facilitar consultas SQL en PostgreSQL.
 - Mantengo algunos datos anomalos controlados para probar validaciones de calidad en las siguientes capas.
-

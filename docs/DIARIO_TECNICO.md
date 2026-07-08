@@ -138,3 +138,11 @@ Al finalizar el Día 1 quedaron listos los fundamentos del proyecto:
 - herramientas locales principales instaladas y verificadas.
 
 Con esto considero cerrada la fase de preparación. El siguiente paso será iniciar la generación de datos sintéticos y cargarlos en PostgreSQL para comenzar el flujo real del pipeline.
+
+## Día 2 - Generación de datos sintéticos y carga inicial
+
+### Convención de nombres en el código
+
+Al iniciar los scripts de generación y carga decidí mantener el código propio con nombres en español. Esta convención aplica principalmente para funciones, variables de control y argumentos de ejecución, porque es la forma en la que suelo escribir código y me ayuda a explicar la lógica con más naturalidad.
+
+También decidí conservar los nombres físicos de columnas en inglés dentro de las tablas fuente, por ejemplo `sale_id`, `product_id`, `store_id` y `net_amount`. Lo hice porque esos campos funcionan como el contrato técnico de la fuente transaccional simulada. En un entorno real es común recibir sistemas origen con nombres en inglés, y para este proyecto me parece más importante documentarlos y transformarlos de forma consistente que traducirlos manualmente desde el inicio.

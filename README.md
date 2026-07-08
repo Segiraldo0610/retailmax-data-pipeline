@@ -102,6 +102,9 @@ La estructura base del repositorio es:
   README.md
 /data-generation
   README_DATA_GENERATION.md
+  generar_datos_retail.py
+  cargar_a_postgres.py
+  validar_fuente.py
 /pipelines
   /bronze
   /silver
@@ -111,6 +114,7 @@ La estructura base del repositorio es:
   DIARIO_TECNICO.md
   modelo_datos_source.md
 /config
+  generacion_datos.yaml
 README.md
 CHANGELOG.md
 ```

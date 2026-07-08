@@ -2,6 +2,12 @@
 
 Este documento describe el modelo relacional inicial que uso para simular la operacion transaccional de RetailMax.
 
+## Convencion de nombres
+
+Para el codigo propio uso nombres en espanol, especialmente en funciones, variables de control y argumentos de ejecucion. En cambio, en las tablas fuente mantengo nombres fisicos de columnas en ingles, como `sale_id`, `product_id`, `store_id` y `net_amount`.
+
+Tome esta decision porque esas columnas representan el contrato tecnico de la fuente simulada. En un proyecto real es comun recibir sistemas origen con nombres en ingles, y lo importante para el pipeline es documentarlos, validarlos y transformarlos de forma consistente.
+
 ## Entidades principales
 
 ### `source.mstr_proveedores`
@@ -127,4 +133,3 @@ Relacion principal:
 - Algunas ventas tienen `customer_id` nulo para representar compras de invitado.
 - Algunas ventas incluyen anomalias controladas, como cantidades invalidas o descuentos extremos, para probar reglas de calidad en Silver.
 - Los datos personales son sinteticos y no representan personas reales.
-

@@ -1,0 +1,42 @@
+# Parametros iniciales para la generacion de datos sinteticos.
+
+proyecto:
+  escenario: retail_ecommerce
+  semilla_aleatoria: 20260707
+  perfil_default: dev
+
+rango_fechas:
+  fecha_inicio: "2025-07-01"
+  fecha_fin: "2026-06-30"
+
+perfiles:
+  dev:
+    MSTR_ARTICULOS: 500
+    MSTR_PROVEEDORES: 80
+    MSTR_TIENDAS: 30
+    CRM_MIEMBROS: 3000
+    TRANS_VENTAS: 30000
+    INV_STOCK_DIARIO: 40000
+    POST_DEVOLUCIONES: 1500
+  full:
+    usar_filas_objetivo: true
+
+tablas:
+  MSTR_ARTICULOS:
+    filas_objetivo: 5000
+  MSTR_PROVEEDORES:
+    filas_objetivo: 800
+  MSTR_TIENDAS:
+    filas_objetivo: 150
+  CRM_MIEMBROS:
+    filas_objetivo: 50000
+  TRANS_VENTAS:
+    filas_objetivo: 1000000
+  INV_STOCK_DIARIO:
+    filas_objetivo: 750000
+  POST_DEVOLUCIONES:
+    filas_objetivo: 50000
+
+calidad:
+  tasa_nulos_controlada: 0.05
+  incluir_anomalias_intencionales: true
