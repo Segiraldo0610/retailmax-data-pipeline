@@ -5,12 +5,6 @@
 **Fecha de inicio:** 7 de julio de 2026  
 **Modalidad:** Repositorio Git + evidencias de ejecución + documentación técnica
 
-## Resumen ejecutivo
-
-Este proyecto presenta una solución end-to-end de ingeniería de datos desarrollada para la prueba técnica de DataKnow. La solución parte de un escenario de negocio de Retail y comercio electrónico, genera datos sintéticos, los carga en una fuente relacional y los procesa mediante una arquitectura Medallion con capas Bronze, Silver y Gold.
-
-El objetivo principal es construir una solución clara, reproducible y técnicamente sustentada, cubriendo generación de datos, infraestructura como código, ingesta, transformación, calidad, gobierno, seguridad, orquestación y documentación.
-
 ## Sector elegido, plataforma cloud y justificación
 
 Para esta prueba seleccioné el **escenario B: Retail y comercio electrónico** y la plataforma cloud **Microsoft Fabric**.
@@ -21,11 +15,11 @@ Elegí Microsoft Fabric porque es una de las plataformas válidas en el enunciad
 
 Para cubrir el requisito de Infraestructura como Código, usaré **Terraform** como estrategia principal. En los recursos de Fabric que puedan administrarse por código, me apoyaré en el proveedor de Terraform para Microsoft Fabric. Si alguna configuración del trial requiere pasos desde la interfaz gráfica, documentaré el supuesto, el procedimiento y la evidencia correspondiente.
 
-## Introducción
+## Resumen ejecutivo
 
-Este proyecto desarrolla una solución end-to-end de ingeniería de datos para un escenario de negocio de Retail. La solución cubre el ciclo completo de trabajo: generación de datos sintéticos, carga en una fuente relacional, ingesta hacia una arquitectura Medallion, limpieza, transformación, construcción de tablas analíticas, validaciones de calidad, orquestación, gobierno, seguridad y documentación.
+Este proyecto presenta una solución end-to-end de ingeniería de datos desarrollada para la prueba técnica de DataKnow. La solución parte de un escenario de negocio de Retail y comercio electrónico, genera datos sintéticos, los carga en una fuente relacional y los procesa mediante una arquitectura Medallion con capas Bronze, Silver y Gold.
 
-La intención no es construir una arquitectura innecesariamente compleja, sino una solución clara, reproducible y bien sustentada. Cada decisión técnica debe tener una razón concreta y debe poder explicarse durante una entrevista técnica.
+El objetivo principal es construir una solución clara, reproducible y técnicamente sustentada, cubriendo generación de datos, infraestructura como código, ingesta, transformación, calidad, gobierno, seguridad, orquestación y documentación. La intención no es construir una arquitectura innecesariamente compleja, sino una solución que pueda ejecutar, explicar y defender con criterio técnico.
 
 ## Objetivo
 
@@ -121,6 +115,8 @@ Esta estructura sigue la recomendación del enunciado y separa las responsabilid
 
 ## Estado actual
 
-El proyecto se encuentra en fase de preparación del ambiente y definición inicial de arquitectura. Ya están definidos el escenario de negocio, la plataforma principal, la estrategia de IaC y la estructura base del repositorio. También quedó configurada una base PostgreSQL local en Docker para simular la fuente transaccional inicial.
+El proyecto se encuentra en fase inicial de implementación. Ya están definidos el escenario de negocio, la plataforma principal, la estrategia de IaC y la estructura base del repositorio. También quedó configurada una base PostgreSQL local en Docker para simular la fuente transaccional inicial.
 
 En Microsoft Fabric se creó el workspace `ws_retailmax_data_dev` y el Lakehouse principal `lh_retailmax_medallion`, que será utilizado para organizar las capas Bronze, Silver y Gold.
+
+Adicionalmente, el repositorio Git ya cuenta con una primera versión de la estructura del proyecto y una base Terraform en `/infra`. La configuración de Terraform fue inicializada, validada y planificada sin generar cambios sobre infraestructura real, debido a la protección definida para trabajar con Fabric Trial.
