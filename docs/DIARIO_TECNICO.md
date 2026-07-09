@@ -176,3 +176,7 @@ Después de la carga ejecuté el script de validación de fuente. Las validacion
 Las anomalías de cantidad inválida y descuento extremo pueden aparecer de forma controlada, porque las dejé intencionalmente en la generación para poder probar reglas de calidad en la capa Silver. En cambio, las validaciones de integridad relacional deben mantenerse en cero.
 
 Con este paso dejé lista la fuente transaccional simulada para iniciar la ingesta hacia la capa Bronze.
+
+### Revisión visual en DBeaver
+
+Finalmente revisé la carga desde DBeaver para confirmar visualmente que el esquema `source` existe en la base `retail_db`, que las siete tablas fueron creadas correctamente y que los conteos coinciden con la carga realizada desde Python. Esta revisión no reemplaza las validaciones automatizadas, pero me sirve como evidencia visual del estado de la fuente y como apoyo para explicar el proceso durante la sustentación.

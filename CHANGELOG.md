@@ -15,6 +15,7 @@
 - Cargué los datos sintéticos en PostgreSQL dentro del esquema `source`.
 - Ejecuté validaciones iniciales de conteos, relaciones y reglas básicas de calidad sobre la fuente.
 - Complementé el README con las tecnologías y herramientas usadas en el proyecto, separando herramientas del pipeline y herramientas de apoyo.
+- Revisé visualmente en DBeaver el esquema `source`, las tablas cargadas y los conteos principales.
 
 ## 2026-07-07
 
