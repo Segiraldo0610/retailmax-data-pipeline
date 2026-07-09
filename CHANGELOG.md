@@ -14,6 +14,7 @@
 - Generé datos sintéticos en modo `dev` para las siete tablas fuente del escenario RetailMax.
 - Cargué los datos sintéticos en PostgreSQL dentro del esquema `source`.
 - Ejecuté validaciones iniciales de conteos, relaciones y reglas básicas de calidad sobre la fuente.
+- Complementé el README con las tecnologías y herramientas usadas en el proyecto, separando herramientas del pipeline y herramientas de apoyo.
 
 ## 2026-07-07
 

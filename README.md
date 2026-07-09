@@ -79,19 +79,29 @@ La arquitectura seguirá el patrón Medallion:
 
 Esta separación permite mantener trazabilidad desde el dato original hasta los indicadores finales.
 
-## Tecnologías seleccionadas
+## Tecnologías y herramientas seleccionadas
 
-Las tecnologías iniciales del proyecto son:
+Las tecnologías y herramientas usadas en el proyecto no cumplen todas el mismo rol. Algunas hacen parte directa del pipeline y otras las uso como apoyo para desarrollo, validación o documentación:
 
-- Python para generación de datos, validaciones y automatización.
-- Faker para datos sintéticos.
-- PostgreSQL como fuente relacional simulada.
-- Docker para ejecutar PostgreSQL localmente.
-- Docker Compose para definir la base local como servicio reproducible.
-- Microsoft Fabric como plataforma principal de procesamiento y orquestación.
-- Terraform como estrategia principal de IaC.
-- Parquet o Delta Lake como formato analítico.
-- Git y GitHub para control de versiones y entrega.
+- Microsoft Fabric como plataforma principal de procesamiento, Lakehouse y orquestación.
+- OneLake y Lakehouse de Fabric para organizar las capas Bronze, Silver y Gold.
+- PostgreSQL como fuente relacional simulada para representar el sistema transaccional de RetailMax.
+- Docker Desktop para ejecutar PostgreSQL localmente sin instalar la base directamente en Windows.
+- Docker Compose para definir y levantar PostgreSQL como un servicio reproducible.
+- Python para generación de datos, carga a PostgreSQL, validaciones y automatización local.
+- Pandas y NumPy para construcción y manipulación de datos sintéticos.
+- Faker para generar datos sintéticos con valores realistas.
+- PyYAML para leer la configuración parametrizada de generación de datos.
+- SQLAlchemy y psycopg2 para conectarme desde Python a PostgreSQL.
+- python-dotenv para cargar variables locales desde `.env` sin exponer credenciales reales.
+- PyArrow para escribir archivos Parquet durante la generación local.
+- Terraform como estrategia principal de Infraestructura como Código.
+- Azure CLI como herramienta de apoyo para autenticación y operación dentro del ecosistema Microsoft cuando sea necesario.
+- DBeaver como cliente visual para revisar PostgreSQL y generar evidencias de consultas.
+- Visual Studio Code como editor de código y documentación.
+- PowerShell como consola principal de ejecución local.
+- Git para control de versiones local y GitHub como plataforma prevista para la entrega del repositorio.
+- Parquet y Delta Lake como formatos analíticos considerados para las capas del Lakehouse.
 
 ## Estructura inicial del repositorio
 
