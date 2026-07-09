@@ -161,3 +161,5 @@ En el ambiente local generé datos sintéticos en modo `dev`, los cargué en Pos
 | `source.post_devoluciones` | 1.500 |
 
 La configuración de Terraform fue inicializada, validada y planificada sin generar cambios sobre infraestructura real, debido a la protección definida para trabajar con Fabric Trial. El siguiente paso del proyecto es iniciar la ingesta de estas tablas hacia la capa Bronze del Lakehouse.
+
+Como preparación de ese siguiente paso dejé una primera base de ingesta en `/pipelines/bronze`, con documentación del enfoque, un script para crear tablas Bronze en Fabric y una validación de conteos esperados. Esta base queda pendiente de ejecutarse en Microsoft Fabric para no registrar como terminado algo que todavía debe validarse en el Lakehouse.

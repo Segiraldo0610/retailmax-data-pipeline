@@ -16,6 +16,7 @@
 - Ejecuté validaciones iniciales de conteos, relaciones y reglas básicas de calidad sobre la fuente.
 - Complementé el README con las tecnologías y herramientas usadas en el proyecto, separando herramientas del pipeline y herramientas de apoyo.
 - Revisé visualmente en DBeaver el esquema `source`, las tablas cargadas y los conteos principales.
+- Preparé la base de la ingesta Bronze en Fabric, incluyendo documentación, notebook de carga y validación de conteos.
 
 ## 2026-07-07
 

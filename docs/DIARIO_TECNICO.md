@@ -180,3 +180,9 @@ Con este paso dejé lista la fuente transaccional simulada para iniciar la inges
 ### Revisión visual en DBeaver
 
 Finalmente revisé la carga desde DBeaver para confirmar visualmente que el esquema `source` existe en la base `retail_db`, que las siete tablas fueron creadas correctamente y que los conteos coinciden con la carga realizada desde Python. Esta revisión no reemplaza las validaciones automatizadas, pero me sirve como evidencia visual del estado de la fuente y como apoyo para explicar el proceso durante la sustentación.
+
+### Preparación del trabajo Bronze
+
+Antes de iniciar la ejecución real en Fabric, dejé preparada la base de la capa Bronze dentro de `/pipelines/bronze`. La decisión fue trabajar la ingesta desde archivos Parquet generados localmente y cargados al Lakehouse en `Files/source/`, porque la fuente PostgreSQL está corriendo en mi equipo y el trial de Fabric puede limitar conexiones directas hacia una base local.
+
+En esta preparación definí que las tablas Bronze conservarán los datos casi crudos y agregarán metadatos de auditoría como fecha de ingesta, tabla origen, archivo origen y modo de carga. Esta decisión me permite validar trazabilidad sin mezclar todavía reglas de limpieza, que quedarán para la capa Silver.
