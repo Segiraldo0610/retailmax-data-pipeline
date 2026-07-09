@@ -134,8 +134,20 @@ Además de las carpetas recomendadas por el enunciado, mantengo algunos archivos
 
 ## Estado actual
 
-El proyecto se encuentra en fase inicial de implementación. Ya están definidos el escenario de negocio, la plataforma principal, la estrategia de IaC y la estructura base del repositorio. También quedó configurada una base PostgreSQL local en Docker para simular la fuente transaccional inicial.
+El proyecto ya cuenta con la base inicial de trabajo: escenario de negocio definido, plataforma seleccionada, estructura del repositorio, configuración local de PostgreSQL, base Terraform en `/infra`, workspace de Fabric y Lakehouse principal.
 
-En Microsoft Fabric se creó el workspace `ws_retailmax_data_dev` y el Lakehouse principal `lh_retailmax_medallion`, que será utilizado para organizar las capas Bronze, Silver y Gold.
+En Microsoft Fabric se creó el workspace `ws_retailmax_data_dev` y el Lakehouse `lh_retailmax_medallion`, que será utilizado para organizar las capas Bronze, Silver y Gold.
 
-Adicionalmente, el repositorio Git ya cuenta con una primera versión de la estructura del proyecto y una base Terraform en `/infra`. La configuración de Terraform fue inicializada, validada y planificada sin generar cambios sobre infraestructura real, debido a la protección definida para trabajar con Fabric Trial.
+En el ambiente local generé datos sintéticos en modo `dev`, los cargué en PostgreSQL dentro del esquema `source` y ejecuté validaciones iniciales de conteos e integridad. Los conteos cargados fueron:
+
+| Tabla | Registros |
+|---|---:|
+| `source.mstr_proveedores` | 80 |
+| `source.mstr_articulos` | 500 |
+| `source.mstr_tiendas` | 30 |
+| `source.crm_miembros` | 3.000 |
+| `source.trans_ventas` | 30.000 |
+| `source.inv_stock_diario` | 40.000 |
+| `source.post_devoluciones` | 1.500 |
+
+La configuración de Terraform fue inicializada, validada y planificada sin generar cambios sobre infraestructura real, debido a la protección definida para trabajar con Fabric Trial. El siguiente paso del proyecto es iniciar la ingesta de estas tablas hacia la capa Bronze del Lakehouse.

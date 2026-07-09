@@ -146,3 +146,33 @@ Con esto considero cerrada la fase de preparación. El siguiente paso será inic
 Al iniciar los scripts de generación y carga decidí mantener el código propio con nombres en español. Esta convención aplica principalmente para funciones, variables de control y argumentos de ejecución, porque es la forma en la que suelo escribir código y me ayuda a explicar la lógica con más naturalidad.
 
 También decidí conservar los nombres físicos de columnas en inglés dentro de las tablas fuente, por ejemplo `sale_id`, `product_id`, `store_id` y `net_amount`. Lo hice porque esos campos funcionan como el contrato técnico de la fuente transaccional simulada. En un entorno real es común recibir sistemas origen con nombres en inglés, y para este proyecto me parece más importante documentarlos y transformarlos de forma consistente que traducirlos manualmente desde el inicio.
+
+### Generación de datos sintéticos
+
+Después de revisar la estructura de los scripts, validé que el proyecto ya contaba con datos sintéticos generados en modo `dev`. Este perfil lo uso para pruebas de desarrollo porque mantiene un volumen suficiente para validar relaciones y reglas sin hacer lenta cada ejecución.
+
+Los archivos quedaron generados en la carpeta local `data/source/` en formato CSV y Parquet. Esta carpeta no se versiona porque contiene datos generados y puede crecer bastante cuando use el perfil completo.
+
+Los conteos generados en modo `dev` fueron:
+
+- `mstr_proveedores`: 80 registros.
+- `mstr_articulos`: 500 registros.
+- `mstr_tiendas`: 30 registros.
+- `crm_miembros`: 3.000 registros.
+- `trans_ventas`: 30.000 registros.
+- `inv_stock_diario`: 40.000 registros.
+- `post_devoluciones`: 1.500 registros.
+
+### Carga en PostgreSQL
+
+Con PostgreSQL activo en Docker y el contenedor `retailmax_postgres` en estado `healthy`, ejecuté el script de carga a PostgreSQL. El script tomó los CSV de `data/source/` y creó las tablas en el esquema `source` de la base `retail_db`.
+
+La carga fue exitosa y mantuvo los mismos conteos del perfil `dev`. Para esta etapa decidí usar una carga con reemplazo de tablas, porque permite repetir el proceso durante el desarrollo sin duplicar registros. Esta decisión ayuda a mantener la idempotencia del flujo local.
+
+### Validación inicial de la fuente
+
+Después de la carga ejecuté el script de validación de fuente. Las validaciones revisan conteos, relaciones principales y algunos casos de calidad básicos, como ventas sin producto, ventas sin tienda, devoluciones sin venta, cantidades inválidas, descuentos extremos y stock negativo.
+
+Las anomalías de cantidad inválida y descuento extremo pueden aparecer de forma controlada, porque las dejé intencionalmente en la generación para poder probar reglas de calidad en la capa Silver. En cambio, las validaciones de integridad relacional deben mantenerse en cero.
+
+Con este paso dejé lista la fuente transaccional simulada para iniciar la ingesta hacia la capa Bronze.
