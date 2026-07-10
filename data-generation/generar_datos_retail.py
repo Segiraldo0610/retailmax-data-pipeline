@@ -5,6 +5,8 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pyarrow as pa
+import pyarrow.parquet as pq
 import yaml
 from faker import Faker
 
@@ -341,13 +343,24 @@ def generar_devoluciones(
     )
 
 
+def escribir_parquet_compatible_fabric(datos_tabla: pd.DataFrame, ruta_archivo: Path) -> None:
+    datos_salida = datos_tabla.copy()
+    columnas_fecha = datos_salida.select_dtypes(include=["datetime64"]).columns
+
+    for columna in columnas_fecha:
+        datos_salida[columna] = pd.to_datetime(datos_salida[columna]).dt.strftime("%Y-%m-%d")
+
+    tabla_arrow = pa.Table.from_pandas(datos_salida, preserve_index=False)
+    pq.write_table(tabla_arrow, ruta_archivo)
+
+
 def escribir_salidas(tablas: dict[str, pd.DataFrame], carpeta_salida: Path, escribir_parquet: bool) -> None:
     carpeta_salida.mkdir(parents=True, exist_ok=True)
     for nombre_logico, datos_tabla in tablas.items():
         nombre_archivo = ARCHIVOS_TABLAS[nombre_logico]
         datos_tabla.to_csv(carpeta_salida / f"{nombre_archivo}.csv", index=False, encoding="utf-8")
         if escribir_parquet:
-            datos_tabla.to_parquet(carpeta_salida / f"{nombre_archivo}.parquet", index=False)
+            escribir_parquet_compatible_fabric(datos_tabla, carpeta_salida / f"{nombre_archivo}.parquet")
 
 
 def generar_tablas(configuracion: dict, perfil: str) -> dict[str, pd.DataFrame]:
