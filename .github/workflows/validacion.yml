@@ -1,0 +1,59 @@
+name: Validacion del proyecto
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validar:
+    name: Validar codigo y configuracion
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias Python
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Validar sintaxis Python
+        run: |
+          python -m compileall data-generation pipelines
+
+      - name: Validar archivos YAML
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import yaml
+
+          rutas = [
+              Path("config/generacion_datos.yaml"),
+              Path("orchestration/pipeline_retailmax_fabric.yaml"),
+          ]
+
+          for ruta in rutas:
+              with ruta.open("r", encoding="utf-8") as archivo:
+                  yaml.safe_load(archivo)
+              print(f"{ruta}: YAML valido")
+          PY
+
+      - name: Preparar Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Validar formato Terraform
+        run: terraform -chdir=infra fmt -check
+
+      - name: Validar configuracion Terraform
+        run: |
+          terraform -chdir=infra init -backend=false
+          terraform -chdir=infra validate

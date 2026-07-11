@@ -342,6 +342,19 @@ También preparé documentación técnica complementaria dentro de `/docs` para 
 
 Con estos documentos busco que la solución no dependa solo del código. La idea es que el evaluador pueda entender el diseño, las relaciones y el propósito de cada capa sin tener que preguntarme primero.
 
+### Validación CI/CD básica
+
+Agregué un workflow de GitHub Actions en `.github/workflows/validacion.yml`. La intención no es desplegar recursos ni ejecutar cargas reales desde CI, porque eso requeriría credenciales y configuración adicional. Para esta prueba decidí usarlo como una validación básica y segura.
+
+El workflow revisa:
+
+- sintaxis de los scripts Python;
+- lectura correcta de archivos YAML;
+- formato de Terraform;
+- validación de la configuración Terraform.
+
+Esta decisión me ayuda a detectar errores simples antes de integrar cambios y aporta un control de calidad adicional sin sobrecomplicar la solución.
+
 ### Cierre del día
 
 Al finalizar este bloque quedó definida la orquestación lógica del pipeline:
@@ -352,4 +365,5 @@ Al finalizar este bloque quedó definida la orquestación lógica del pipeline:
 - validaciones usadas como compuertas de calidad;
 - criterio de idempotencia documentado;
 - supuesto de Fabric Trial registrado;
-- documentación de arquitectura, catálogo y modelo entidad-relación agregada.
+- documentación de arquitectura, catálogo y modelo entidad-relación agregada;
+- validación CI/CD básica agregada con GitHub Actions.

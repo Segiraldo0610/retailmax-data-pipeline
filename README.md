@@ -101,6 +101,7 @@ Las tecnologías y herramientas usadas en el proyecto no cumplen todas el mismo 
 - Visual Studio Code como editor de código y documentación.
 - PowerShell como consola principal de ejecución local.
 - Git para control de versiones local y GitHub como plataforma prevista para la entrega del repositorio.
+- GitHub Actions como validación CI/CD básica para revisar sintaxis, configuración y Terraform.
 - Parquet y Delta Lake como formatos analíticos considerados para las capas del Lakehouse.
 
 ## Estructura inicial del repositorio
@@ -108,6 +109,9 @@ Las tecnologías y herramientas usadas en el proyecto no cumplen todas el mismo 
 La estructura base del repositorio es:
 
 ```text
+/.github
+  /workflows
+    validacion.yml
 /infra
   README.md
 /data-generation
@@ -145,6 +149,7 @@ Además de las carpetas recomendadas por el enunciado, mantengo algunos archivos
 - `.env.example`: documenta las variables necesarias para ejecutar el proyecto sin exponer credenciales reales.
 - `requirements.txt`: permite instalar las dependencias de Python de forma reproducible.
 - `docker-compose.yml`: define la base PostgreSQL local usada como fuente transaccional simulada.
+- `.github/workflows/validacion.yml`: define una validación CI/CD básica para revisar sintaxis de Python, archivos YAML y configuración Terraform antes de integrar cambios.
 - `infra/.terraform.lock.hcl`: fija las versiones del proveedor de Terraform para que futuras ejecuciones usen la misma selección de dependencias. No contiene estado ni credenciales.
 
 ## Estado actual
@@ -183,5 +188,6 @@ El estado resumido de las capas es:
 | Gold | Completado | Modelo analítico con dimensiones, hechos y KPIs |
 | Orquestación | Definida | DAG lógico documentado para Microsoft Fabric Data Factory Pipelines |
 | Documentación técnica | En avance | Arquitectura, catálogo de datos y modelo entidad-relación documentados |
+| CI/CD | Definido | Workflow de GitHub Actions para validaciones básicas |
 
 Con este avance, el siguiente paso del proyecto es materializar o evidenciar la ejecución del pipeline en Fabric, completar evidencias, reforzar la documentación de calidad y preparar la entrega final del repositorio.

@@ -16,6 +16,7 @@
 - Agregué documentación de arquitectura en `/docs/arquitectura.md`.
 - Agregué catálogo de datos en `/docs/catalogo_datos.md`.
 - Agregué modelo entidad-relación y modelo analítico en `/docs/modelo_entidad_relacion.md`.
+- Agregué workflow CI/CD en `.github/workflows/validacion.yml` para validar Python, YAML y Terraform.
 - Actualicé la documentación del proyecto para reflejar el avance real del pipeline Medallion.
 
 ## 2026-07-09
