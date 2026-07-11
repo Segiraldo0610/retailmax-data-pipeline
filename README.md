@@ -124,14 +124,17 @@ La estructura base del repositorio es:
   pipeline_retailmax_fabric.yaml
 /docs
   DIARIO_TECNICO.md
+  arquitectura.md
+  catalogo_datos.md
   modelo_datos_source.md
+  modelo_entidad_relacion.md
 /config
   generacion_datos.yaml
 README.md
 CHANGELOG.md
 ```
 
-El `README.md` principal se mantiene en la raíz del repositorio porque el enunciado lo solicita como documento completo de la solución. La carpeta `docs/` contiene la documentación ampliada, incluyendo el diario técnico, el modelo de datos fuente, el catálogo, los diagramas y las evidencias que se agreguen durante el desarrollo. La carpeta `/infra` conserva su propio `README.md` porque allí deben quedar las instrucciones de despliegue de IaC.
+El `README.md` principal se mantiene en la raíz del repositorio porque el enunciado lo solicita como documento completo de la solución. La carpeta `docs/` contiene la documentación ampliada, incluyendo el diario técnico, la arquitectura, el catálogo de datos, el modelo de datos fuente, el modelo entidad-relación y las evidencias que se agreguen durante el desarrollo. La carpeta `/infra` conserva su propio `README.md` porque allí deben quedar las instrucciones de despliegue de IaC.
 
 ## Archivos de soporte del repositorio
 
@@ -179,5 +182,6 @@ El estado resumido de las capas es:
 | Silver | Completado | Datos limpios, tipados, validados y con reglas de calidad |
 | Gold | Completado | Modelo analítico con dimensiones, hechos y KPIs |
 | Orquestación | Definida | DAG lógico documentado para Microsoft Fabric Data Factory Pipelines |
+| Documentación técnica | En avance | Arquitectura, catálogo de datos y modelo entidad-relación documentados |
 
 Con este avance, el siguiente paso del proyecto es materializar o evidenciar la ejecución del pipeline en Fabric, completar evidencias, reforzar la documentación de calidad y preparar la entrega final del repositorio.

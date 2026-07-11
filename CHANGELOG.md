@@ -13,6 +13,9 @@
 - Definí la orquestación lógica del pipeline con Microsoft Fabric Data Factory Pipelines.
 - Agregué documentación de orquestación en `/orchestration/README_ORCHESTRATION.md`.
 - Agregué la definición del DAG en `/orchestration/pipeline_retailmax_fabric.yaml`.
+- Agregué documentación de arquitectura en `/docs/arquitectura.md`.
+- Agregué catálogo de datos en `/docs/catalogo_datos.md`.
+- Agregué modelo entidad-relación y modelo analítico en `/docs/modelo_entidad_relacion.md`.
 - Actualicé la documentación del proyecto para reflejar el avance real del pipeline Medallion.
 
 ## 2026-07-09

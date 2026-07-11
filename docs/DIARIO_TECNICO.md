@@ -332,6 +332,16 @@ También definí una política simple de reintentos: un reintento por actividad,
 
 Como estoy trabajando sobre una capacidad Trial, dejé versionada la definición del pipeline en el repositorio. Si el entorno permite exportar el pipeline desde Fabric, esa evidencia se puede anexar en `/docs`. Si no lo permite, la definición YAML y el README de orquestación dejan claro cómo se debe construir el flujo dentro de la interfaz.
 
+### Documentación de arquitectura y datos
+
+También preparé documentación técnica complementaria dentro de `/docs` para cubrir los puntos solicitados en el enunciado:
+
+- `arquitectura.md`: explica la arquitectura end-to-end, los componentes usados y las decisiones principales.
+- `catalogo_datos.md`: resume tablas, capas, campos clave, reglas de calidad y tratamiento de datos sensibles.
+- `modelo_entidad_relacion.md`: documenta el modelo relacional fuente y el modelo analítico Gold mediante diagramas Mermaid.
+
+Con estos documentos busco que la solución no dependa solo del código. La idea es que el evaluador pueda entender el diseño, las relaciones y el propósito de cada capa sin tener que preguntarme primero.
+
 ### Cierre del día
 
 Al finalizar este bloque quedó definida la orquestación lógica del pipeline:
@@ -341,4 +351,5 @@ Al finalizar este bloque quedó definida la orquestación lógica del pipeline:
 - dependencias definidas entre Bronze, Silver y Gold;
 - validaciones usadas como compuertas de calidad;
 - criterio de idempotencia documentado;
-- supuesto de Fabric Trial registrado.
+- supuesto de Fabric Trial registrado;
+- documentación de arquitectura, catálogo y modelo entidad-relación agregada.
