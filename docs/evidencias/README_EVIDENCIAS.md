@@ -48,6 +48,11 @@ Dejé dos consultas listas para tomar evidencias sin escribirlas desde cero:
 ## Evidencias pendientes
 
 - Capturas limpias de Fabric para Bronze, Silver y Gold.
-- Captura limpia de DBeaver con conteos de fuente.
 - Captura de GitHub Actions después de subir el repositorio.
 - Captura de orquestación visual en Fabric si se crea el pipeline desde la interfaz.
+
+## Evidencias capturadas
+
+| Archivo | Estado | Observación |
+|---|---|---|
+| `docs/evidencias/capturas/02_postgresql_conteos_source.png` | Capturada | Muestra DBeaver conectado a `retail_db`, el esquema `source`, las siete tablas y los conteos esperados. |
