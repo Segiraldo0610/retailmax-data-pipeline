@@ -120,6 +120,8 @@ La estructura base del repositorio es:
   /silver
   /gold
 /orchestration
+  README_ORCHESTRATION.md
+  pipeline_retailmax_fabric.yaml
 /docs
   DIARIO_TECNICO.md
   modelo_datos_source.md
@@ -176,6 +178,6 @@ El estado resumido de las capas es:
 | Bronze | Completado | Tablas `bronze_` creadas desde archivos Parquet en Fabric |
 | Silver | Completado | Datos limpios, tipados, validados y con reglas de calidad |
 | Gold | Completado | Modelo analítico con dimensiones, hechos y KPIs |
-| Orquestación | En preparación | Queda pendiente integrar y documentar la ejecución ordenada del pipeline |
+| Orquestación | Definida | DAG lógico documentado para Microsoft Fabric Data Factory Pipelines |
 
-Con este avance, el siguiente paso del proyecto es cerrar la orquestación, completar evidencias, reforzar la documentación de calidad y preparar la entrega final del repositorio.
+Con este avance, el siguiente paso del proyecto es materializar o evidenciar la ejecución del pipeline en Fabric, completar evidencias, reforzar la documentación de calidad y preparar la entrega final del repositorio.

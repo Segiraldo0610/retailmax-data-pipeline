@@ -297,3 +297,48 @@ Al finalizar el Día 4 quedaron implementadas y validadas las capas Silver y Gol
 - validaciones ejecutadas sobre ambas capas;
 - documentación técnica actualizada con las decisiones más importantes;
 - base lista para trabajar orquestación, calidad formal y entrega final.
+
+## Día 5 - Orquestación y control de ejecución
+
+### Selección del orquestador
+
+Para la orquestación decidí usar Microsoft Fabric Data Factory Pipelines. Esta decisión es coherente con la plataforma seleccionada porque los notebooks, el Lakehouse y las tablas Delta ya están dentro del mismo workspace de Fabric.
+
+No elegí un orquestador externo para esta prueba porque habría agregado complejidad adicional sin aportar mucho al objetivo principal. En este caso me interesa demostrar que el flujo puede ejecutarse de forma ordenada, con dependencias claras y validaciones entre capas.
+
+### Definición del DAG
+
+Documenté la definición lógica del pipeline en `/orchestration/pipeline_retailmax_fabric.yaml`. Este archivo describe las actividades, el orden de ejecución, las dependencias, los notebooks sugeridos y las salidas esperadas.
+
+El orden definido es:
+
+1. validar archivos fuente;
+2. ejecutar ingesta Bronze;
+3. validar Bronze;
+4. ejecutar transformación Silver;
+5. validar Silver;
+6. ejecutar modelo Gold;
+7. validar Gold.
+
+La idea principal es que cada validación funcione como una compuerta. Si Bronze no valida, Silver no debe ejecutarse. Si Silver no valida, Gold no debe construirse. Esta regla evita propagar errores hacia las capas analíticas.
+
+### Idempotencia y manejo de errores
+
+Durante el desarrollo mantuve las escrituras en modo `overwrite`. Para esta prueba me parece una decisión adecuada porque permite repetir ejecuciones sin duplicar registros y facilita validar el resultado final.
+
+También definí una política simple de reintentos: un reintento por actividad, dos minutos de espera y timeout de treinta minutos. No busqué una configuración demasiado compleja porque el objetivo es que el pipeline sea entendible y reproducible.
+
+### Supuesto de Fabric Trial
+
+Como estoy trabajando sobre una capacidad Trial, dejé versionada la definición del pipeline en el repositorio. Si el entorno permite exportar el pipeline desde Fabric, esa evidencia se puede anexar en `/docs`. Si no lo permite, la definición YAML y el README de orquestación dejan claro cómo se debe construir el flujo dentro de la interfaz.
+
+### Cierre del día
+
+Al finalizar este bloque quedó definida la orquestación lógica del pipeline:
+
+- orquestador seleccionado: Microsoft Fabric Data Factory Pipelines;
+- DAG documentado en YAML;
+- dependencias definidas entre Bronze, Silver y Gold;
+- validaciones usadas como compuertas de calidad;
+- criterio de idempotencia documentado;
+- supuesto de Fabric Trial registrado.

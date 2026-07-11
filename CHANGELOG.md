@@ -10,6 +10,9 @@
 - Construí la tabla de hechos `gold_fact_ventas` como base analítica de las ventas.
 - Agregué KPIs de ventas diarias, inventario diario y segmentación RFM de clientes.
 - Ejecuté validaciones sobre las capas Silver y Gold para confirmar existencia de tablas, conteos y métricas principales.
+- Definí la orquestación lógica del pipeline con Microsoft Fabric Data Factory Pipelines.
+- Agregué documentación de orquestación en `/orchestration/README_ORCHESTRATION.md`.
+- Agregué la definición del DAG en `/orchestration/pipeline_retailmax_fabric.yaml`.
 - Actualicé la documentación del proyecto para reflejar el avance real del pipeline Medallion.
 
 ## 2026-07-09

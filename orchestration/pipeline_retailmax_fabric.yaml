@@ -1,0 +1,110 @@
+nombre_pipeline: pl_retailmax_medallion
+orquestador: Microsoft Fabric Data Factory Pipelines
+workspace: ws_retailmax_data_dev
+lakehouse: lh_retailmax_medallion
+modo_ejecucion: manual_o_programado
+
+politica_general:
+  reintentos: 1
+  intervalo_reintento_minutos: 2
+  timeout_actividad_minutos: 30
+  detener_si_falla_validacion: true
+
+actividades:
+  - id: validar_archivos_fuente
+    orden: 1
+    tipo: control
+    descripcion: Confirmo que los archivos Parquet fuente existen antes de iniciar Bronze.
+    entrada:
+      ruta_fabric: Files/source_parquet
+      archivos_esperados:
+        - mstr_proveedores.parquet
+        - mstr_articulos.parquet
+        - mstr_tiendas.parquet
+        - crm_miembros.parquet
+        - trans_ventas.parquet
+        - inv_stock_diario.parquet
+        - post_devoluciones.parquet
+    salida_esperada: Siete archivos fuente disponibles para ingesta.
+    depende_de: []
+
+  - id: ejecutar_bronze
+    orden: 2
+    tipo: notebook_fabric
+    descripcion: Leo los Parquet fuente y creo las tablas Bronze con metadatos de auditoria.
+    notebook_sugerido: cu_01_ingesta_bronze
+    script_base: pipelines/bronze/01_ingesta_bronze_fabric.py
+    salida_esperada:
+      - bronze_mstr_proveedores
+      - bronze_mstr_articulos
+      - bronze_mstr_tiendas
+      - bronze_crm_miembros
+      - bronze_trans_ventas
+      - bronze_inv_stock_diario
+      - bronze_post_devoluciones
+    depende_de:
+      - validar_archivos_fuente
+
+  - id: validar_bronze
+    orden: 3
+    tipo: notebook_fabric
+    descripcion: Valido conteos esperados de la capa Bronze antes de avanzar a Silver.
+    notebook_sugerido: cu_01_validar_bronze
+    script_base: pipelines/bronze/02_validar_bronze_fabric.py
+    salida_esperada: Conteos Bronze correctos.
+    depende_de:
+      - ejecutar_bronze
+
+  - id: ejecutar_silver
+    orden: 4
+    tipo: notebook_fabric
+    descripcion: Transformo Bronze en Silver aplicando tipos, limpieza, reglas de calidad y proteccion de datos.
+    notebook_sugerido: cu_02_transformacion_silver
+    script_base: pipelines/silver/01_transformacion_silver_fabric.py
+    salida_esperada:
+      - silver_mstr_proveedores
+      - silver_mstr_articulos
+      - silver_mstr_tiendas
+      - silver_crm_miembros
+      - silver_trans_ventas
+      - silver_inv_stock_diario
+      - silver_post_devoluciones
+    depende_de:
+      - validar_bronze
+
+  - id: validar_silver
+    orden: 5
+    tipo: notebook_fabric
+    descripcion: Valido conteos, reglas de calidad y columnas principales de Silver.
+    notebook_sugerido: cu_02_validar_silver
+    script_base: pipelines/silver/02_validar_silver_fabric.py
+    salida_esperada: Silver lista para consumo analitico.
+    depende_de:
+      - ejecutar_silver
+
+  - id: ejecutar_gold
+    orden: 6
+    tipo: notebook_fabric
+    descripcion: Construyo dimensiones, tabla de hechos y KPIs desde Silver.
+    notebook_sugerido: cu_03_modelo_gold
+    script_base: pipelines/gold/01_modelo_gold_fabric.py
+    salida_esperada:
+      - gold_dim_producto
+      - gold_dim_tienda
+      - gold_dim_cliente
+      - gold_fact_ventas
+      - gold_kpi_ventas_diarias
+      - gold_kpi_inventario_diario
+      - gold_kpi_clientes_rfm
+    depende_de:
+      - validar_silver
+
+  - id: validar_gold
+    orden: 7
+    tipo: notebook_fabric
+    descripcion: Valido tablas analiticas y resumen de KPIs principales.
+    notebook_sugerido: cu_03_validar_gold
+    script_base: pipelines/gold/02_validar_gold_fabric.py
+    salida_esperada: Modelo Gold validado para analisis.
+    depende_de:
+      - ejecutar_gold
