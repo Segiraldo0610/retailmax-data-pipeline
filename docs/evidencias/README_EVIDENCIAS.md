@@ -60,3 +60,7 @@ Dejé dos consultas listas para tomar evidencias sin escribirlas desde cero:
 | `docs/evidencias/capturas/03_fabric_lakehouse_archivos_source_parquet.png` | Capturada | Muestra el Lakehouse `lh_retailmax_medallion` en `Files/source_parquet` con siete archivos Parquet cargados. |
 | `docs/evidencias/capturas/04_fabric_tablas_bronze.png` | Capturada | Muestra las siete tablas `bronze_` creadas en el Lakehouse dentro de `Tables/dbo`. |
 | `docs/evidencias/capturas/05_fabric_validacion_bronze.png` | Capturada | Muestra la validación de conteos Bronze ejecutada correctamente en Fabric. |
+| `docs/evidencias/capturas/06a_fabric_validacion_silver_conteos_calidad.png` | Capturada | Muestra conteos correctos de Silver y primeras métricas de calidad. |
+| `docs/evidencias/capturas/06b_fabric_validacion_silver_cierre.png` | Capturada | Muestra métricas finales de Silver y mensaje de validación correcta. |
+| `docs/evidencias/capturas/07a_fabric_validacion_gold_conteos_kpis.png` | Capturada | Muestra conteos correctos de Gold y resumen de KPIs principales. |
+| `docs/evidencias/capturas/07b_fabric_validacion_gold_cierre.png` | Capturada | Muestra KPIs de inventario y mensaje de validación Gold finalizada correctamente. |
