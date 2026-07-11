@@ -59,3 +59,4 @@ Dejé dos consultas listas para tomar evidencias sin escribirlas desde cero:
 | `docs/evidencias/capturas/02_postgresql_conteos_source.png` | Capturada | Muestra DBeaver conectado a `retail_db`, el esquema `source`, las siete tablas y los conteos esperados. |
 | `docs/evidencias/capturas/03_fabric_lakehouse_archivos_source_parquet.png` | Capturada | Muestra el Lakehouse `lh_retailmax_medallion` en `Files/source_parquet` con siete archivos Parquet cargados. |
 | `docs/evidencias/capturas/04_fabric_tablas_bronze.png` | Capturada | Muestra las siete tablas `bronze_` creadas en el Lakehouse dentro de `Tables/dbo`. |
+| `docs/evidencias/capturas/05_fabric_validacion_bronze.png` | Capturada | Muestra la validación de conteos Bronze ejecutada correctamente en Fabric. |
