@@ -31,6 +31,13 @@ Las capturas deben tomarse limpias, sin pestañas personales visibles y sin most
 | `08_fabric_orquestacion_pipeline.png` | Pipeline o definición visual en Fabric, si se materializa | Evidencia de orquestación |
 | `09_github_actions_validacion.png` | Ejecución exitosa del workflow en GitHub | Evidencia de CI/CD básico |
 
+## Consultas de apoyo
+
+Dejé dos consultas listas para tomar evidencias sin escribirlas desde cero:
+
+- `docs/evidencias/consulta_conteos_source.sql`: conteos de las siete tablas del esquema `source` en PostgreSQL.
+- `docs/evidencias/consulta_resumen_gold.sql`: resumen de ventas, devoluciones e inventario desde tablas Gold.
+
 ## Criterios para aceptar una captura
 
 - Debe mostrar claramente el nombre del recurso o tabla.
