@@ -11,8 +11,8 @@
 - Agregué KPIs de ventas diarias, inventario diario y segmentación RFM de clientes.
 - Ejecuté validaciones sobre las capas Silver y Gold para confirmar existencia de tablas, conteos y métricas principales.
 - Definí la orquestación lógica del pipeline con Microsoft Fabric Data Factory Pipelines.
-- Agregué documentación de orquestación en `/orchestration/README_ORCHESTRATION.md`.
-- Agregué la definición del DAG en `/orchestration/pipeline_retailmax_fabric.yaml`.
+- Agregué documentación de orquestación en `/orchestration/README_ORQUESTACION.md`.
+- Agregué la definición del DAG en `/orchestration/orquestacion_retailmax_fabric.yaml`.
 - Agregué documentación de arquitectura en `/docs/arquitectura.md`.
 - Agregué catálogo de datos en `/docs/catalogo_datos.md`.
 - Agregué modelo entidad-relación y modelo analítico en `/docs/modelo_entidad_relacion.md`.

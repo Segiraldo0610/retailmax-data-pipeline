@@ -27,7 +27,7 @@ lh_retailmax_medallion
 La definición lógica del pipeline queda documentada en:
 
 ```text
-orchestration/pipeline_retailmax_fabric.yaml
+orchestration/orquestacion_retailmax_fabric.yaml
 ```
 
 ## Orden de ejecución

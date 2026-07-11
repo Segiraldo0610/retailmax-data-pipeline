@@ -308,7 +308,7 @@ No elegí un orquestador externo para esta prueba porque habría agregado comple
 
 ### Definición del DAG
 
-Documenté la definición lógica del pipeline en `/orchestration/pipeline_retailmax_fabric.yaml`. Este archivo describe las actividades, el orden de ejecución, las dependencias, los notebooks sugeridos y las salidas esperadas.
+Documenté la definición lógica del pipeline en `/orchestration/orquestacion_retailmax_fabric.yaml`. Este archivo describe las actividades, el orden de ejecución, las dependencias, los notebooks sugeridos y las salidas esperadas.
 
 El orden definido es:
 

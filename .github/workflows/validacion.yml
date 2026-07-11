@@ -38,7 +38,7 @@ jobs:
 
           rutas = [
               Path("config/generacion_datos.yaml"),
-              Path("orchestration/pipeline_retailmax_fabric.yaml"),
+              Path("orchestration/orquestacion_retailmax_fabric.yaml"),
           ]
 
           for ruta in rutas:

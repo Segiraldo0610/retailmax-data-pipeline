@@ -124,8 +124,8 @@ La estructura base del repositorio es:
   /silver
   /gold
 /orchestration
-  README_ORCHESTRATION.md
-  pipeline_retailmax_fabric.yaml
+  README_ORQUESTACION.md
+  orquestacion_retailmax_fabric.yaml
 /docs
   DIARIO_TECNICO.md
   arquitectura.md
