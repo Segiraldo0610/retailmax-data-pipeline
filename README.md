@@ -130,6 +130,9 @@ La estructura base del repositorio es:
   DIARIO_TECNICO.md
   arquitectura.md
   catalogo_datos.md
+  /evidencias
+    README_EVIDENCIAS.md
+    /capturas
   modelo_datos_source.md
   modelo_entidad_relacion.md
 /config
@@ -138,7 +141,7 @@ README.md
 CHANGELOG.md
 ```
 
-El `README.md` principal se mantiene en la raíz del repositorio porque el enunciado lo solicita como documento completo de la solución. La carpeta `docs/` contiene la documentación ampliada, incluyendo el diario técnico, la arquitectura, el catálogo de datos, el modelo de datos fuente, el modelo entidad-relación y las evidencias que se agreguen durante el desarrollo. La carpeta `/infra` conserva su propio `README.md` porque allí deben quedar las instrucciones de despliegue de IaC.
+El `README.md` principal se mantiene en la raíz del repositorio porque el enunciado lo solicita como documento completo de la solución. La carpeta `docs/` contiene la documentación ampliada, incluyendo el diario técnico, la arquitectura, el catálogo de datos, el modelo de datos fuente, el modelo entidad-relación y las evidencias de ejecución. La carpeta `/infra` conserva su propio `README.md` porque allí deben quedar las instrucciones de despliegue de IaC.
 
 ## Archivos de soporte del repositorio
 
@@ -189,5 +192,6 @@ El estado resumido de las capas es:
 | Orquestación | Definida | DAG lógico documentado para Microsoft Fabric Data Factory Pipelines |
 | Documentación técnica | En avance | Arquitectura, catálogo de datos y modelo entidad-relación documentados |
 | CI/CD | Definido | Workflow de GitHub Actions para validaciones básicas |
+| Evidencias | En preparación | Guía de capturas y validaciones en `/docs/evidencias` |
 
 Con este avance, el siguiente paso del proyecto es materializar o evidenciar la ejecución del pipeline en Fabric, completar evidencias, reforzar la documentación de calidad y preparar la entrega final del repositorio.

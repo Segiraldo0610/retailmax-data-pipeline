@@ -355,6 +355,12 @@ El workflow revisa:
 
 Esta decisión me ayuda a detectar errores simples antes de integrar cambios y aporta un control de calidad adicional sin sobrecomplicar la solución.
 
+### Preparación de evidencias
+
+Preparé una guía de evidencias en `/docs/evidencias/README_EVIDENCIAS.md`. Allí organicé las validaciones de consola que ya puedo demostrar y las capturas que debo tomar para la entrega final.
+
+Decidí separar las evidencias en una carpeta propia para no mezclar documentación conceptual con pruebas de ejecución. También definí nombres sugeridos para las capturas, de forma que sea fácil relacionarlas con la fuente, Bronze, Silver, Gold, orquestación, IaC y CI/CD.
+
 ### Cierre del día
 
 Al finalizar este bloque quedó definida la orquestación lógica del pipeline:
@@ -366,4 +372,5 @@ Al finalizar este bloque quedó definida la orquestación lógica del pipeline:
 - criterio de idempotencia documentado;
 - supuesto de Fabric Trial registrado;
 - documentación de arquitectura, catálogo y modelo entidad-relación agregada;
-- validación CI/CD básica agregada con GitHub Actions.
+- validación CI/CD básica agregada con GitHub Actions;
+- guía de evidencias preparada para el cierre de entrega.
