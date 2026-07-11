@@ -1,5 +1,26 @@
 # Changelog
 
+## 2026-07-11
+
+- Construí la capa Silver en Fabric con limpieza, tipado y reglas de calidad sobre las tablas Bronze.
+- Convertí campos de fecha a tipo `date` en Silver, manteniendo Bronze como capa de aterrizaje compatible.
+- Agregué banderas de calidad para ventas inválidas, descuentos extremos, ventas canceladas, inventario agotado y riesgo de quiebre.
+- Protegí el correo de clientes mediante `email_hash` para evitar exponer el dato personal en capas analíticas.
+- Construí la capa Gold con dimensiones de producto, tienda y cliente.
+- Construí la tabla de hechos `gold_fact_ventas` como base analítica de las ventas.
+- Agregué KPIs de ventas diarias, inventario diario y segmentación RFM de clientes.
+- Ejecuté validaciones sobre las capas Silver y Gold para confirmar existencia de tablas, conteos y métricas principales.
+- Actualicé la documentación del proyecto para reflejar el avance real del pipeline Medallion.
+
+## 2026-07-09
+
+- Cargué los archivos Parquet fuente al Lakehouse de Fabric en `Files/source_parquet/`.
+- Ejecuté la ingesta Bronze desde notebook en Microsoft Fabric.
+- Agregué metadatos de auditoría a las tablas Bronze para conservar trazabilidad del origen.
+- Identifiqué un problema de compatibilidad entre Spark en Fabric y fechas Parquet con tipo `TIMESTAMP(NANOS,false)`.
+- Ajusté la generación de Parquet para escribir fechas como texto en formato `YYYY-MM-DD`.
+- Validé que la ingesta Bronze leyera correctamente los archivos ajustados y creara las tablas esperadas.
+
 ## 2026-07-08
 
 - Ajusté la estructura del repositorio con base en la estructura recomendada por el enunciado.

@@ -144,11 +144,11 @@ Además de las carpetas recomendadas por el enunciado, mantengo algunos archivos
 
 ## Estado actual
 
-El proyecto ya cuenta con la base inicial de trabajo: escenario de negocio definido, plataforma seleccionada, estructura del repositorio, configuración local de PostgreSQL, base Terraform en `/infra`, workspace de Fabric y Lakehouse principal.
+El proyecto ya cuenta con una primera versión funcional del flujo Medallion: escenario de negocio definido, plataforma seleccionada, estructura del repositorio, configuración local de PostgreSQL, base Terraform en `/infra`, workspace de Fabric, Lakehouse principal y capas Bronze, Silver y Gold ejecutadas en Microsoft Fabric.
 
 En Microsoft Fabric se creó el workspace `ws_retailmax_data_dev` y el Lakehouse `lh_retailmax_medallion`, que será utilizado para organizar las capas Bronze, Silver y Gold.
 
-En el ambiente local generé datos sintéticos en modo `dev`, los cargué en PostgreSQL dentro del esquema `source` y ejecuté validaciones iniciales de conteos e integridad. Los conteos cargados fueron:
+En el ambiente local generé datos sintéticos en modo `dev`, los cargué en PostgreSQL dentro del esquema `source` y ejecuté validaciones iniciales de conteos e integridad. Los conteos cargados y usados como base de comparación fueron:
 
 | Tabla | Registros |
 |---|---:|
@@ -160,6 +160,22 @@ En el ambiente local generé datos sintéticos en modo `dev`, los cargué en Pos
 | `source.inv_stock_diario` | 40.000 |
 | `source.post_devoluciones` | 1.500 |
 
-La configuración de Terraform fue inicializada, validada y planificada sin generar cambios sobre infraestructura real, debido a la protección definida para trabajar con Fabric Trial. El siguiente paso del proyecto es iniciar la ingesta de estas tablas hacia la capa Bronze del Lakehouse.
+La configuración de Terraform fue inicializada, validada y planificada sin generar cambios sobre infraestructura real, debido a la protección definida para trabajar con Fabric Trial. Esta decisión mantiene documentada la estrategia de IaC sin forzar un despliegue inestable por limitaciones del trial.
 
-Como preparación de ese siguiente paso dejé una primera base de ingesta en `/pipelines/bronze`, con documentación del enfoque, un script para crear tablas Bronze en Fabric y una validación de conteos esperados. Esta base queda pendiente de ejecutarse en Microsoft Fabric para no registrar como terminado algo que todavía debe validarse en el Lakehouse.
+La capa Bronze fue ejecutada en Fabric a partir de archivos Parquet cargados en el Lakehouse. Para evitar un problema de compatibilidad entre Parquet y Spark en Fabric con fechas almacenadas como `TIMESTAMP(NANOS,false)`, decidí escribir las fechas de los archivos fuente como texto en formato `YYYY-MM-DD`. Esta decisión mantiene Bronze como una capa de aterrizaje simple y compatible, y deja la conversión formal de tipos para Silver.
+
+La capa Silver transforma las tablas Bronze en tablas limpias y tipadas. En esta etapa convertí fechas a tipo `date`, normalicé textos, ajusté campos numéricos, agregué banderas de calidad y protegí el correo de clientes usando un hash. Con esto evito exponer directamente un dato personal y dejo la información lista para análisis sin perder trazabilidad.
+
+La capa Gold construye el modelo analítico principal del proyecto. Incluye dimensiones de producto, tienda y cliente, una tabla de hechos de ventas y tablas de KPIs para ventas diarias, inventario diario y segmentación RFM de clientes. Esta capa concentra las reglas de negocio que permiten responder preguntas del escenario Retail, como ventas netas, devoluciones, riesgo de quiebre de inventario y valor de clientes.
+
+El estado resumido de las capas es:
+
+| Componente | Estado | Resultado principal |
+|---|---|---|
+| Fuente PostgreSQL | Completado | Tablas `source` cargadas y validadas |
+| Bronze | Completado | Tablas `bronze_` creadas desde archivos Parquet en Fabric |
+| Silver | Completado | Datos limpios, tipados, validados y con reglas de calidad |
+| Gold | Completado | Modelo analítico con dimensiones, hechos y KPIs |
+| Orquestación | En preparación | Queda pendiente integrar y documentar la ejecución ordenada del pipeline |
+
+Con este avance, el siguiente paso del proyecto es cerrar la orquestación, completar evidencias, reforzar la documentación de calidad y preparar la entrega final del repositorio.

@@ -183,6 +183,117 @@ Finalmente revisé la carga desde DBeaver para confirmar visualmente que el esqu
 
 ### Preparación del trabajo Bronze
 
-Antes de iniciar la ejecución real en Fabric, dejé preparada la base de la capa Bronze dentro de `/pipelines/bronze`. La decisión fue trabajar la ingesta desde archivos Parquet generados localmente y cargados al Lakehouse en `Files/source/`, porque la fuente PostgreSQL está corriendo en mi equipo y el trial de Fabric puede limitar conexiones directas hacia una base local.
+Antes de iniciar la ejecución real en Fabric, dejé preparada la base de la capa Bronze dentro de `/pipelines/bronze`. La decisión fue trabajar la ingesta desde archivos Parquet generados localmente y cargados al Lakehouse en `Files/source_parquet/`, porque la fuente PostgreSQL está corriendo en mi equipo y el trial de Fabric puede limitar conexiones directas hacia una base local.
 
 En esta preparación definí que las tablas Bronze conservarán los datos casi crudos y agregarán metadatos de auditoría como fecha de ingesta, tabla origen, archivo origen y modo de carga. Esta decisión me permite validar trazabilidad sin mezclar todavía reglas de limpieza, que quedarán para la capa Silver.
+
+### Cierre del día
+
+Al finalizar el Día 2 quedó completa la fuente transaccional simulada y validada:
+
+- datos sintéticos generados en modo `dev`;
+- carga exitosa en PostgreSQL dentro del esquema `source`;
+- validaciones iniciales ejecutadas sobre conteos, relaciones y reglas básicas;
+- revisión visual realizada en DBeaver;
+- base de ingesta Bronze preparada para Fabric.
+
+Con esto dejé listo el punto de partida para llevar los datos al Lakehouse y comenzar el trabajo por capas.
+
+## Día 3 - Ingesta Bronze en Microsoft Fabric
+
+### Carga de archivos fuente al Lakehouse
+
+Para iniciar la capa Bronze cargué los archivos Parquet generados localmente al Lakehouse `lh_retailmax_medallion` en Microsoft Fabric. Organicé los archivos dentro de `Files/source_parquet/` para separar claramente los datos de entrada de las carpetas propias de Bronze, Silver y Gold.
+
+Esta decisión mantiene la trazabilidad del origen: primero tengo una zona de archivos fuente y luego creo las tablas Bronze desde esos archivos. Así evito mezclar la carga inicial con las transformaciones posteriores.
+
+### Notebook de ingesta Bronze
+
+La ingesta Bronze la trabajé desde un notebook de Fabric. El objetivo de esta etapa fue leer cada archivo fuente, crear una tabla Bronze equivalente y agregar campos de auditoría que ayuden a rastrear el origen del dato.
+
+Los campos de auditoría definidos para Bronze fueron:
+
+- fecha y hora de ingesta;
+- nombre de la tabla origen;
+- ruta o archivo fuente;
+- capa del pipeline.
+
+Decidí no aplicar reglas fuertes de limpieza en Bronze porque esta capa debe conservar el dato lo más cercano posible al origen. Las reglas de negocio y calidad quedan para Silver.
+
+### Ajuste por compatibilidad de fechas en Parquet
+
+Durante la lectura de los archivos Parquet en Fabric identifiqué un error de Spark relacionado con el tipo `TIMESTAMP(NANOS,false)`. Esto ocurrió porque algunos campos de fecha se estaban escribiendo en Parquet con una precisión que Spark en Fabric no podía interpretar correctamente.
+
+Para resolverlo ajusté la generación de archivos Parquet y dejé las fechas como texto en formato `YYYY-MM-DD` dentro de la zona fuente. Esta solución es coherente con el modelo Medallion porque Bronze puede recibir el dato en un formato simple y compatible, mientras que Silver se encarga de convertir formalmente esos campos a tipo `date`.
+
+Con este ajuste evité modificar manualmente los archivos en Fabric y mantuve el proceso reproducible desde la generación local.
+
+### Validación Bronze
+
+Después de corregir la compatibilidad de fechas, ejecuté nuevamente la ingesta Bronze y validé que las tablas cargaran correctamente en el Lakehouse. La validación se enfocó en confirmar que las siete tablas origen estuvieran disponibles y que los conteos coincidieran con los datos generados en el ambiente local.
+
+### Cierre del día
+
+Al finalizar el Día 3 quedó completa la primera capa del Lakehouse:
+
+- archivos fuente cargados en `Files/source_parquet/`;
+- ingesta Bronze ejecutada desde Fabric;
+- problema de fechas en Parquet identificado, corregido y documentado;
+- tablas Bronze creadas y validadas;
+- criterio definido para dejar las conversiones de tipos en Silver.
+
+## Día 4 - Transformaciones Silver y modelo Gold
+
+### Construcción de la capa Silver
+
+Con Bronze disponible, avancé a la capa Silver. En esta etapa transformé los datos crudos en tablas más confiables para análisis. El trabajo principal fue aplicar limpieza, tipado, reglas de calidad y protección de datos sensibles.
+
+Las decisiones más importantes de Silver fueron:
+
+- convertir fechas desde texto a tipo `date`;
+- limpiar espacios y normalizar textos;
+- ajustar campos numéricos para cantidades, precios, descuentos y montos;
+- marcar ventas canceladas o no válidas;
+- identificar cantidades inválidas y descuentos extremos;
+- marcar productos agotados o en riesgo de quiebre de inventario;
+- proteger el correo de clientes mediante `email_hash` y no exponer el correo original en la capa analítica.
+
+Esta capa es importante porque separa el dato recibido del dato confiable. Si aparece una anomalía, no la elimino sin explicación; la marco con una bandera para que pueda analizarse después.
+
+### Validación de la capa Silver
+
+Después de construir Silver ejecuté validaciones para revisar conteos, tipos de datos y reglas principales. La validación confirmó que las tablas Silver quedaron disponibles y que las reglas de calidad se podían revisar de forma explícita.
+
+También confirmé que las fechas ya quedaran convertidas correctamente después del ajuste realizado en Bronze. Esto valida que la decisión de guardar fechas como texto en la zona fuente y convertirlas en Silver funcionó como se esperaba.
+
+### Construcción de la capa Gold
+
+Con Silver validada, construí la capa Gold como modelo analítico del proyecto. Esta capa está orientada a responder preguntas de negocio y no solo a almacenar datos limpios.
+
+El modelo Gold incluye:
+
+- `gold_dim_producto`, con información analítica de productos;
+- `gold_dim_tienda`, con información de tiendas;
+- `gold_dim_cliente`, con información de clientes protegida y segmentable;
+- `gold_fact_ventas`, como tabla principal de hechos de ventas;
+- `gold_kpi_ventas_diarias`, para seguimiento diario de ventas y devoluciones;
+- `gold_kpi_inventario_diario`, para revisar inventario, agotados y riesgo de quiebre;
+- `gold_kpi_clientes_rfm`, para segmentación de clientes por recencia, frecuencia y valor monetario.
+
+Decidí separar dimensiones, hechos y KPIs porque facilita el consumo analítico y permite explicar mejor el modelo. Las dimensiones describen entidades, la tabla de hechos registra eventos de venta y las tablas KPI resumen métricas relevantes para el negocio.
+
+### Validación de la capa Gold
+
+Finalmente ejecuté la validación de Gold. Esta validación confirma que las tablas analíticas existen, tienen registros y contienen las métricas esperadas para el escenario Retail.
+
+Con Gold funcionando, el proyecto ya cuenta con un flujo completo desde generación de datos hasta tablas analíticas. El siguiente paso es cerrar la orquestación, reforzar evidencias y dejar la documentación lista para entrega.
+
+### Cierre del día
+
+Al finalizar el Día 4 quedaron implementadas y validadas las capas Silver y Gold:
+
+- Silver con limpieza, tipado, reglas de calidad y protección de datos sensibles;
+- Gold con dimensiones, hechos y KPIs;
+- validaciones ejecutadas sobre ambas capas;
+- documentación técnica actualizada con las decisiones más importantes;
+- base lista para trabajar orquestación, calidad formal y entrega final.
