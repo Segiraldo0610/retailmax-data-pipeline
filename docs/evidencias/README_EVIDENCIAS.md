@@ -55,4 +55,5 @@ Dejé dos consultas listas para tomar evidencias sin escribirlas desde cero:
 
 | Archivo | Estado | Observación |
 |---|---|---|
+| `docs/evidencias/capturas/01_postgresql_dbeaver_source.png` | Capturada | Muestra DBeaver conectado a `retail_db` con el esquema `source` y las siete tablas fuente. |
 | `docs/evidencias/capturas/02_postgresql_conteos_source.png` | Capturada | Muestra DBeaver conectado a `retail_db`, el esquema `source`, las siete tablas y los conteos esperados. |
