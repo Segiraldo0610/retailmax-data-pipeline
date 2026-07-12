@@ -149,25 +149,25 @@ También decidí conservar los nombres físicos de columnas en inglés dentro de
 
 ### Generación de datos sintéticos
 
-Después de revisar la estructura de los scripts, validé que el proyecto ya contaba con datos sintéticos generados en modo `dev`. Este perfil lo uso para pruebas de desarrollo porque mantiene un volumen suficiente para validar relaciones y reglas sin hacer lenta cada ejecución.
+Después de revisar la estructura de los scripts, dejé la generación de datos parametrizada y ajusté el perfil de entrega a modo `full`. Este perfil usa los volúmenes mínimos del escenario Retail definido en el enunciado, mientras que el perfil `dev` queda únicamente como apoyo para pruebas rápidas durante el desarrollo.
 
-Los archivos quedaron generados en la carpeta local `data/source/` en formato CSV y Parquet. Esta carpeta no se versiona porque contiene datos generados y puede crecer bastante cuando use el perfil completo.
+Los archivos quedan generados en la carpeta local `data/source/` en formato CSV y Parquet. Esta carpeta no se versiona porque contiene datos generados y puede crecer bastante al usar el perfil completo.
 
-Los conteos generados en modo `dev` fueron:
+Los conteos generados en modo `full` fueron:
 
-- `mstr_proveedores`: 80 registros.
-- `mstr_articulos`: 500 registros.
-- `mstr_tiendas`: 30 registros.
-- `crm_miembros`: 3.000 registros.
-- `trans_ventas`: 30.000 registros.
-- `inv_stock_diario`: 40.000 registros.
-- `post_devoluciones`: 1.500 registros.
+- `mstr_proveedores`: 800 registros.
+- `mstr_articulos`: 5.000 registros.
+- `mstr_tiendas`: 150 registros.
+- `crm_miembros`: 50.000 registros.
+- `trans_ventas`: 1.000.000 registros.
+- `inv_stock_diario`: 750.000 registros.
+- `post_devoluciones`: 50.000 registros.
 
 ### Carga en PostgreSQL
 
 Con PostgreSQL activo en Docker y el contenedor `retailmax_postgres` en estado `healthy`, ejecuté el script de carga a PostgreSQL. El script tomó los CSV de `data/source/` y creó las tablas en el esquema `source` de la base `retail_db`.
 
-La carga fue exitosa y mantuvo los mismos conteos del perfil `dev`. Para esta etapa decidí usar una carga con reemplazo de tablas, porque permite repetir el proceso durante el desarrollo sin duplicar registros. Esta decisión ayuda a mantener la idempotencia del flujo local.
+La carga queda planteada con los conteos del perfil `full`. Para esta etapa decidí usar una carga con reemplazo de tablas, porque permite repetir el proceso durante el desarrollo o la entrega sin duplicar registros. Además, ajusté el script para usar `COPY` de PostgreSQL como carga masiva, ya que el volumen completo exige una ejecución más eficiente que una carga por lotes pequeños. Esta decisión ayuda a mantener la idempotencia del flujo local y reduce el tiempo de ejecución.
 
 ### Validación inicial de la fuente
 
@@ -191,7 +191,7 @@ En esta preparación definí que las tablas Bronze conservarán los datos casi c
 
 Al finalizar el Día 2 quedó completa la fuente transaccional simulada y validada:
 
-- datos sintéticos generados en modo `dev`;
+- datos sintéticos generados en modo `full`;
 - carga exitosa en PostgreSQL dentro del esquema `source`;
 - validaciones iniciales ejecutadas sobre conteos, relaciones y reglas básicas;
 - revisión visual realizada en DBeaver;

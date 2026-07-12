@@ -3,14 +3,14 @@
 from pyspark.sql import functions as F
 
 
-CONTEOS_ESPERADOS_DEV = {
-    "silver_mstr_proveedores": 80,
-    "silver_mstr_articulos": 500,
-    "silver_mstr_tiendas": 30,
-    "silver_crm_miembros": 3000,
-    "silver_trans_ventas": 30000,
-    "silver_inv_stock_diario": 40000,
-    "silver_post_devoluciones": 1500,
+CONTEOS_ESPERADOS_FULL = {
+    "silver_mstr_proveedores": 800,
+    "silver_mstr_articulos": 5000,
+    "silver_mstr_tiendas": 150,
+    "silver_crm_miembros": 50000,
+    "silver_trans_ventas": 1000000,
+    "silver_inv_stock_diario": 750000,
+    "silver_post_devoluciones": 50000,
 }
 
 
@@ -49,7 +49,7 @@ def imprimir_metricas_calidad():
     ).show(truncate=False)
 
 
-for nombre_tabla, total_esperado in CONTEOS_ESPERADOS_DEV.items():
+for nombre_tabla, total_esperado in CONTEOS_ESPERADOS_FULL.items():
     validar_conteo(nombre_tabla, total_esperado)
 
 imprimir_metricas_calidad()

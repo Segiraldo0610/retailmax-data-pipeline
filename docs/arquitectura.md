@@ -62,7 +62,7 @@ En Gold construyo el modelo orientado al análisis. Esta capa contiene dimension
 
 ## Supuestos
 
-- La solución usa un perfil de datos `dev` para mantener tiempos de ejecución razonables durante la prueba.
+- La solución usa el perfil de datos `full` para alinearse con los volúmenes mínimos del escenario Retail. El perfil `dev` queda disponible únicamente para pruebas rápidas durante el desarrollo.
 - Los datos son sintéticos y no representan personas reales.
 - La capacidad Fabric Trial puede limitar algunas automatizaciones; por eso documento las acciones manuales y dejo equivalentes versionados cuando aplica.
 - Para el alcance de la prueba uso escrituras `overwrite`, lo que permite repetir el pipeline sin duplicar registros.

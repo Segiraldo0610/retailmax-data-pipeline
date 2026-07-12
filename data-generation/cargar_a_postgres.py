@@ -37,12 +37,37 @@ def obtener_url_base_datos() -> str:
 
 def leer_csv_tabla(carpeta_entrada: Path, nombre_logico: str) -> pd.DataFrame:
     nombre_tabla = ARCHIVOS_TABLAS[nombre_logico]
-    ruta_archivo = carpeta_entrada / f"{nombre_tabla}.csv"
+    ruta_archivo = obtener_ruta_csv_tabla(carpeta_entrada, nombre_tabla)
     if not ruta_archivo.exists():
         raise FileNotFoundError(f"No encontre el archivo de entrada: {ruta_archivo}")
 
     columnas_fecha = COLUMNAS_FECHA.get(nombre_tabla, [])
     return pd.read_csv(ruta_archivo, parse_dates=columnas_fecha)
+
+
+def obtener_ruta_csv_tabla(carpeta_entrada: Path, nombre_tabla: str) -> Path:
+    return carpeta_entrada / f"{nombre_tabla}.csv"
+
+
+def citar_identificador(nombre: str) -> str:
+    return '"' + nombre.replace('"', '""') + '"'
+
+
+def cargar_csv_masivo(motor, ruta_archivo: Path, nombre_tabla: str) -> None:
+    tabla_destino = f"{citar_identificador('source')}.{citar_identificador(nombre_tabla)}"
+    sentencia_copy = f"COPY {tabla_destino} FROM STDIN WITH (FORMAT CSV, HEADER TRUE)"
+
+    conexion_raw = motor.raw_connection()
+    try:
+        with conexion_raw.cursor() as cursor:
+            with ruta_archivo.open("r", encoding="utf-8") as archivo_csv:
+                cursor.copy_expert(sentencia_copy, archivo_csv)
+        conexion_raw.commit()
+    except Exception:
+        conexion_raw.rollback()
+        raise
+    finally:
+        conexion_raw.close()
 
 
 def cargar_tablas(carpeta_entrada: Path, si_existe: str) -> dict[str, int]:
@@ -52,19 +77,22 @@ def cargar_tablas(carpeta_entrada: Path, si_existe: str) -> dict[str, int]:
     with motor.begin() as conexion:
         conexion.execute(text("CREATE SCHEMA IF NOT EXISTS source"))
 
-        for nombre_logico in ORDEN_TABLAS:
-            nombre_tabla = ARCHIVOS_TABLAS[nombre_logico]
-            datos_tabla = leer_csv_tabla(carpeta_entrada, nombre_logico)
-            datos_tabla.to_sql(
+    for nombre_logico in ORDEN_TABLAS:
+        nombre_tabla = ARCHIVOS_TABLAS[nombre_logico]
+        ruta_archivo = obtener_ruta_csv_tabla(carpeta_entrada, nombre_tabla)
+        datos_tabla = leer_csv_tabla(carpeta_entrada, nombre_logico)
+
+        with motor.begin() as conexion:
+            datos_tabla.head(0).to_sql(
                 nombre_tabla,
                 conexion,
                 schema="source",
                 if_exists=si_existe,
                 index=False,
-                chunksize=5000,
-                method="multi",
             )
-            conteos[nombre_tabla] = len(datos_tabla)
+
+        cargar_csv_masivo(motor, ruta_archivo, nombre_tabla)
+        conteos[nombre_tabla] = len(datos_tabla)
 
     return conteos
 

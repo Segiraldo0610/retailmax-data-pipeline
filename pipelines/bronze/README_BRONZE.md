@@ -44,29 +44,29 @@ Cada tabla Bronze conserva las columnas originales y agrega:
 - `tabla_origen`: nombre de la tabla fuente.
 - `capa_datos`: valor fijo `bronze`.
 - `archivo_origen`: ruta del archivo leído por Spark.
-- `modo_carga`: valor fijo `overwrite_dev`, usado durante el desarrollo para permitir ejecuciones repetibles.
+- `modo_carga`: valor fijo `overwrite_full`, usado para permitir ejecuciones repetibles sin duplicar registros.
 
 ## Ejecución esperada
 
 1. Abrir el workspace `ws_retailmax_data_dev`.
 2. Abrir el Lakehouse `lh_retailmax_medallion`.
-3. Cargar los archivos Parquet locales de `data/fabric_upload/source/` en `Files/source_parquet/`.
+3. Cargar los archivos Parquet locales de `data/fabric_upload/source_parquet/` en `Files/source_parquet/`.
 4. Crear o abrir un notebook de Fabric asociado al Lakehouse.
 5. Ejecutar el contenido de `01_ingesta_bronze_fabric.py`.
 6. Ejecutar `02_validar_bronze_fabric.py` para revisar conteos.
 7. Tomar evidencia de las tablas creadas y de la salida de validación.
 
-## Conteos esperados en modo dev
+## Conteos esperados en modo full
 
 | Tabla | Registros esperados |
 |---|---:|
-| `bronze_mstr_proveedores` | 80 |
-| `bronze_mstr_articulos` | 500 |
-| `bronze_mstr_tiendas` | 30 |
-| `bronze_crm_miembros` | 3.000 |
-| `bronze_trans_ventas` | 30.000 |
-| `bronze_inv_stock_diario` | 40.000 |
-| `bronze_post_devoluciones` | 1.500 |
+| `bronze_mstr_proveedores` | 800 |
+| `bronze_mstr_articulos` | 5.000 |
+| `bronze_mstr_tiendas` | 150 |
+| `bronze_crm_miembros` | 50.000 |
+| `bronze_trans_ventas` | 1.000.000 |
+| `bronze_inv_stock_diario` | 750.000 |
+| `bronze_post_devoluciones` | 50.000 |
 
 ## Evidencias sugeridas
 

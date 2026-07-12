@@ -3,7 +3,7 @@
 proyecto:
   escenario: retail_ecommerce
   semilla_aleatoria: 20260707
-  perfil_default: dev
+  perfil_default: full
 
 rango_fechas:
   fecha_inicio: "2025-07-01"

@@ -2,14 +2,14 @@
 # en un notebook de Microsoft Fabric asociado al Lakehouse del proyecto.
 
 
-CONTEOS_ESPERADOS_DEV = {
-    "bronze_mstr_proveedores": 80,
-    "bronze_mstr_articulos": 500,
-    "bronze_mstr_tiendas": 30,
-    "bronze_crm_miembros": 3000,
-    "bronze_trans_ventas": 30000,
-    "bronze_inv_stock_diario": 40000,
-    "bronze_post_devoluciones": 1500,
+CONTEOS_ESPERADOS_FULL = {
+    "bronze_mstr_proveedores": 800,
+    "bronze_mstr_articulos": 5000,
+    "bronze_mstr_tiendas": 150,
+    "bronze_crm_miembros": 50000,
+    "bronze_trans_ventas": 1000000,
+    "bronze_inv_stock_diario": 750000,
+    "bronze_post_devoluciones": 50000,
 }
 
 
@@ -30,7 +30,7 @@ def validar_conteo(nombre_tabla, total_esperado):
 
 
 def validar_tablas_bronze():
-    for nombre_tabla, total_esperado in CONTEOS_ESPERADOS_DEV.items():
+    for nombre_tabla, total_esperado in CONTEOS_ESPERADOS_FULL.items():
         validar_conteo(nombre_tabla, total_esperado)
 
     print("Validación Bronze finalizada correctamente")

@@ -4,10 +4,10 @@ from pyspark.sql import functions as F
 
 
 CONTEOS_MINIMOS = {
-    "gold_dim_producto": 500,
-    "gold_dim_tienda": 30,
-    "gold_dim_cliente": 3000,
-    "gold_fact_ventas": 30000,
+    "gold_dim_producto": 5000,
+    "gold_dim_tienda": 150,
+    "gold_dim_cliente": 50000,
+    "gold_fact_ventas": 1000000,
     "gold_kpi_ventas_diarias": 1,
     "gold_kpi_inventario_diario": 1,
     "gold_kpi_clientes_rfm": 1,

@@ -25,9 +25,9 @@ Mantengo los nombres fisicos de tablas y columnas en ingles, por ejemplo `sale_i
 El archivo de configuracion tiene dos perfiles:
 
 - `dev`: volumen reducido para pruebas rapidas durante el desarrollo.
-- `full`: volumen objetivo definido para la prueba.
+- `full`: volumen objetivo definido para la prueba y configurado como perfil por defecto.
 
-Para el desarrollo inicial uso `dev`, porque me permite validar estructura, relaciones y carga sin esperar demasiado tiempo.
+El perfil `dev` queda como apoyo para pruebas rápidas. Para la entrega uso `full`, porque corresponde a los volúmenes mínimos del escenario Retail.
 
 ## Ejecucion
 
@@ -39,7 +39,13 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-Generar datos en modo desarrollo:
+Generar datos en modo entrega:
+
+```powershell
+python data-generation/generar_datos_retail.py
+```
+
+Generar datos en modo desarrollo, si necesito una prueba rápida:
 
 ```powershell
 python data-generation/generar_datos_retail.py --perfil dev
@@ -50,6 +56,8 @@ Cargar datos en PostgreSQL:
 ```powershell
 python data-generation/cargar_a_postgres.py
 ```
+
+El script crea las tablas con la estructura inferida desde los CSV y luego usa `COPY` de PostgreSQL para cargar los datos de forma masiva. Tomé esta decisión porque el perfil `full` maneja tablas de alto volumen y una carga por lotes pequeños sería innecesariamente lenta.
 
 Validar conteos y reglas basicas:
 
@@ -71,5 +79,6 @@ Esta carpeta no se versiona porque puede contener archivos grandes. El repositor
 
 - Uso PostgreSQL como fuente transaccional simulada.
 - Cargo las tablas en el esquema `source`.
+- Uso carga masiva con `COPY` para que el perfil `full` sea reproducible en tiempos razonables.
 - Uso nombres fisicos en minuscula para facilitar consultas SQL en PostgreSQL.
 - Mantengo algunos datos anomalos controlados para probar validaciones de calidad en las siguientes capas.

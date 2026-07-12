@@ -7,7 +7,7 @@ from pyspark.sql import functions as F
 RUTA_BASE_ARCHIVOS = "Files/source_parquet"
 FORMATO_ORIGEN = "parquet"
 PREFIJO_TABLA_BRONZE = "bronze_"
-MODO_CARGA = "overwrite_dev"
+MODO_CARGA = "overwrite_full"
 
 TABLAS_ORIGEN = [
     "mstr_proveedores",

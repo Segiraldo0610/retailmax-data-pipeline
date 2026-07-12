@@ -161,17 +161,19 @@ El proyecto queda con una versión funcional del flujo Medallion: escenario de n
 
 En Microsoft Fabric se creó el workspace `ws_retailmax_data_dev` y el Lakehouse `lh_retailmax_medallion`, que será utilizado para organizar las capas Bronze, Silver y Gold.
 
-En el ambiente local generé datos sintéticos en modo `dev`, los cargué en PostgreSQL dentro del esquema `source` y ejecuté validaciones iniciales de conteos e integridad. Los conteos cargados y usados como base de comparación fueron:
+En el ambiente local generé datos sintéticos en modo `full`, los cargué en PostgreSQL dentro del esquema `source` y ejecuté validaciones iniciales de conteos e integridad. Este perfil usa los volúmenes mínimos solicitados para el escenario Retail del enunciado. Los conteos cargados y usados como base de comparación fueron:
 
 | Tabla | Registros |
 |---|---:|
-| `source.mstr_proveedores` | 80 |
-| `source.mstr_articulos` | 500 |
-| `source.mstr_tiendas` | 30 |
-| `source.crm_miembros` | 3.000 |
-| `source.trans_ventas` | 30.000 |
-| `source.inv_stock_diario` | 40.000 |
-| `source.post_devoluciones` | 1.500 |
+| `source.mstr_proveedores` | 800 |
+| `source.mstr_articulos` | 5.000 |
+| `source.mstr_tiendas` | 150 |
+| `source.crm_miembros` | 50.000 |
+| `source.trans_ventas` | 1.000.000 |
+| `source.inv_stock_diario` | 750.000 |
+| `source.post_devoluciones` | 50.000 |
+
+Para que esta carga fuera reproducible en tiempos razonables, ajusté el proceso local para crear la estructura de tablas y cargar los CSV mediante `COPY` de PostgreSQL. Esta decisión es más adecuada para el perfil `full` que una inserción por lotes pequeños.
 
 La configuración de Terraform fue inicializada, validada y planificada sin generar cambios sobre infraestructura real, debido a la protección definida para trabajar con Fabric Trial. Esta decisión mantiene documentada la estrategia de IaC sin forzar un despliegue inestable por limitaciones del trial.
 

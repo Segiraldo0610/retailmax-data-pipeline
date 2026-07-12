@@ -4,15 +4,15 @@ Este catálogo resume las tablas principales del proyecto, su función dentro de
 
 ## Fuente transaccional simulada
 
-| Tabla | Registros dev | Descripción | Campos clave |
+| Tabla | Registros full | Descripción | Campos clave |
 |---|---:|---|---|
-| `source.mstr_proveedores` | 80 | Proveedores de productos | `supplier_id`, `supplier_name`, `country`, `reliability_score` |
-| `source.mstr_articulos` | 500 | Catálogo de productos | `product_id`, `sku`, `supplier_id`, `unit_cost`, `unit_price` |
-| `source.mstr_tiendas` | 30 | Tiendas, canales y puntos de venta | `store_id`, `store_name`, `city`, `region`, `store_format` |
-| `source.crm_miembros` | 3.000 | Clientes del programa de fidelización | `customer_id`, `member_code`, `email`, `loyalty_segment` |
-| `source.trans_ventas` | 30.000 | Transacciones de venta | `sale_id`, `sale_date`, `store_id`, `customer_id`, `product_id`, `net_amount` |
-| `source.inv_stock_diario` | 40.000 | Inventario diario por tienda y producto | `inventory_id`, `snapshot_date`, `store_id`, `product_id`, `stock_on_hand` |
-| `source.post_devoluciones` | 1.500 | Devoluciones posteriores a ventas | `return_id`, `sale_id`, `return_date`, `refund_amount` |
+| `source.mstr_proveedores` | 800 | Proveedores de productos | `supplier_id`, `supplier_name`, `country`, `reliability_score` |
+| `source.mstr_articulos` | 5.000 | Catálogo de productos | `product_id`, `sku`, `supplier_id`, `unit_cost`, `unit_price` |
+| `source.mstr_tiendas` | 150 | Tiendas, canales y puntos de venta | `store_id`, `store_name`, `city`, `region`, `store_format` |
+| `source.crm_miembros` | 50.000 | Clientes del programa de fidelización | `customer_id`, `member_code`, `email`, `loyalty_segment` |
+| `source.trans_ventas` | 1.000.000 | Transacciones de venta | `sale_id`, `sale_date`, `store_id`, `customer_id`, `product_id`, `net_amount` |
+| `source.inv_stock_diario` | 750.000 | Inventario diario por tienda y producto | `inventory_id`, `snapshot_date`, `store_id`, `product_id`, `stock_on_hand` |
+| `source.post_devoluciones` | 50.000 | Devoluciones posteriores a ventas | `return_id`, `sale_id`, `return_date`, `refund_amount` |
 
 ## Capa Bronze
 
