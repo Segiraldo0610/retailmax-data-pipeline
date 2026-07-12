@@ -1,7 +1,3 @@
-# Este archivo está pensado para ejecutarse después de la ingesta Bronze
-# en un notebook de Microsoft Fabric asociado al Lakehouse del proyecto.
-
-
 CONTEOS_ESPERADOS_FULL = {
     "bronze_mstr_proveedores": 800,
     "bronze_mstr_articulos": 5000,

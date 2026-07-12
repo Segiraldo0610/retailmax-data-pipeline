@@ -1,5 +1,3 @@
-# Este archivo valida conteos y reglas principales de la capa Silver.
-
 from pyspark.sql import functions as F
 
 

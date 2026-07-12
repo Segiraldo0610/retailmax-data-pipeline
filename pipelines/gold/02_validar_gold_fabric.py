@@ -1,5 +1,3 @@
-# Este archivo valida conteos y KPIs principales de la capa Gold.
-
 from pyspark.sql import functions as F
 
 

@@ -1,6 +1,3 @@
-# Este archivo está pensado para ejecutarse en un notebook de Microsoft Fabric
-# asociado al Lakehouse lh_retailmax_medallion.
-
 from pyspark.sql import functions as F
 
 
