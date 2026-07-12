@@ -189,9 +189,9 @@ El estado resumido de las capas es:
 | Bronze | Completado | Tablas `bronze_` creadas desde archivos Parquet en Fabric |
 | Silver | Completado | Datos limpios, tipados, validados y con reglas de calidad |
 | Gold | Completado | Modelo analítico con dimensiones, hechos y KPIs |
-| Orquestación | Definida | DAG lógico documentado para Microsoft Fabric Data Factory Pipelines |
+| Orquestación | Completada | DAG documentado y pipeline visual ejecutado correctamente en Fabric |
 | Documentación técnica | En avance | Arquitectura, catálogo de datos y modelo entidad-relación documentados |
 | CI/CD | Definido | Workflow de GitHub Actions para validaciones básicas |
 | Evidencias | En preparación | Guía de capturas y validaciones en `/docs/evidencias` |
 
-Con este avance, el siguiente paso del proyecto es materializar o evidenciar la ejecución del pipeline en Fabric, completar evidencias, reforzar la documentación de calidad y preparar la entrega final del repositorio.
+Con este avance, el siguiente paso del proyecto es realizar la revisión final de documentación, video de demostración y entrega del repositorio.

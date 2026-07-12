@@ -30,6 +30,20 @@ La definición lógica del pipeline queda documentada en:
 orchestration/orquestacion_retailmax_fabric.yaml
 ```
 
+El pipeline también fue materializado en Microsoft Fabric como una canalización visual con tres actividades de notebook conectadas por condición de ejecución correcta:
+
+```text
+01_bronze_ingesta_validacion
+  -> 02_silver_transformacion_validacion
+  -> 03_gold_modelo_validacion
+```
+
+La evidencia de ejecución correcta quedó guardada en:
+
+```text
+docs/evidencias/capturas/08_fabric_orquestacion_pipeline.png
+```
+
 ## Orden de ejecución
 
 ```mermaid
@@ -79,4 +93,4 @@ Si una actividad falla, el error debe revisarse en la salida del notebook corres
 
 ## Supuesto de implementación
 
-Como estoy trabajando con una capacidad Trial de Fabric, dejo la definición del pipeline versionada en el repositorio y la implementación se puede crear desde la interfaz de Fabric usando las actividades descritas. Si el entorno permite exportar la definición del pipeline, esa evidencia puede agregarse a `/docs` junto con las capturas de ejecución.
+Como estoy trabajando con una capacidad Trial de Fabric, mantengo la definición del pipeline versionada en el repositorio y la implementación visual creada desde la interfaz de Fabric. Esta decisión me permite demostrar la orquestación real sin depender de una exportación automática del pipeline, que puede variar según las capacidades disponibles en el trial.

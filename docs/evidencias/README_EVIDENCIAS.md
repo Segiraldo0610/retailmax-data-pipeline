@@ -64,3 +64,4 @@ Dejé dos consultas listas para tomar evidencias sin escribirlas desde cero:
 | `docs/evidencias/capturas/06b_fabric_validacion_silver_cierre.png` | Capturada | Muestra métricas finales de Silver y mensaje de validación correcta. |
 | `docs/evidencias/capturas/07a_fabric_validacion_gold_conteos_kpis.png` | Capturada | Muestra conteos correctos de Gold y resumen de KPIs principales. |
 | `docs/evidencias/capturas/07b_fabric_validacion_gold_cierre.png` | Capturada | Muestra KPIs de inventario y mensaje de validación Gold finalizada correctamente. |
+| `docs/evidencias/capturas/08_fabric_orquestacion_pipeline.png` | Capturada | Muestra el pipeline visual `pl_retailmax_medallion` ejecutado correctamente con actividades Bronze, Silver y Gold. |

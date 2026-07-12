@@ -19,6 +19,7 @@
 - Agregué workflow CI/CD en `.github/workflows/validacion.yml` para validar Python, YAML y Terraform.
 - Agregué guía de evidencias en `/docs/evidencias/README_EVIDENCIAS.md`.
 - Agregué consultas de apoyo para evidencias de PostgreSQL y Gold en `/docs/evidencias`.
+- Materialicé y evidencié el pipeline visual `pl_retailmax_medallion` en Microsoft Fabric.
 - Actualicé la documentación del proyecto para reflejar el avance real del pipeline Medallion.
 
 ## 2026-07-09

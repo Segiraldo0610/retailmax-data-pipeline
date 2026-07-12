@@ -361,6 +361,16 @@ Preparé una guía de evidencias en `/docs/evidencias/README_EVIDENCIAS.md`. All
 
 Decidí separar las evidencias en una carpeta propia para no mezclar documentación conceptual con pruebas de ejecución. También definí nombres sugeridos para las capturas, de forma que sea fácil relacionarlas con la fuente, Bronze, Silver, Gold, orquestación, IaC y CI/CD.
 
+### Ejecución visual de la orquestación
+
+Materialicé la orquestación en Microsoft Fabric mediante el pipeline visual `pl_retailmax_medallion`. El pipeline quedó compuesto por tres actividades de notebook conectadas por ejecución correcta:
+
+1. `01_bronze_ingesta_validacion`;
+2. `02_silver_transformacion_validacion`;
+3. `03_gold_modelo_validacion`.
+
+La ejecución terminó correctamente en las tres actividades. Con esto dejé evidencia de que el flujo puede ejecutarse de forma ordenada desde Fabric, no solamente desde notebooks individuales.
+
 ### Cierre del día
 
 Al finalizar este bloque quedó definida la orquestación lógica del pipeline:
@@ -373,4 +383,5 @@ Al finalizar este bloque quedó definida la orquestación lógica del pipeline:
 - supuesto de Fabric Trial registrado;
 - documentación de arquitectura, catálogo y modelo entidad-relación agregada;
 - validación CI/CD básica agregada con GitHub Actions;
-- guía de evidencias preparada para el cierre de entrega.
+- guía de evidencias preparada para el cierre de entrega;
+- pipeline visual de Fabric ejecutado correctamente.
