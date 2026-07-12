@@ -4,7 +4,7 @@ En este proyecto elegí **Microsoft Fabric Data Factory Pipelines** como orquest
 
 La orquestación busca que el pipeline no dependa de ejecutar celdas sueltas sin orden. La idea es definir una secuencia clara de actividades, con validaciones entre capas para evitar que una transformación avance si la capa anterior no quedó correcta.
 
-## Pipeline propuesto
+## Pipeline implementado
 
 Nombre del pipeline:
 

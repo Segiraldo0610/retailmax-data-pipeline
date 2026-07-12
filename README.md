@@ -13,7 +13,7 @@ Elegí el escenario de Retail porque plantea reglas de negocio claras y medibles
 
 Elegí Microsoft Fabric porque es una de las plataformas válidas en el enunciado y porque integra en un mismo entorno varias capacidades necesarias para el proyecto: Lakehouse, notebooks de Spark, Data Factory Pipelines y componentes de análisis. Para una prueba de siete días, esta decisión me permite concentrarme en el diseño del pipeline, la calidad de datos y la documentación, reduciendo la complejidad de administrar muchos servicios separados.
 
-Para cubrir el requisito de Infraestructura como Código, usaré **Terraform** como estrategia principal. En los recursos de Fabric que puedan administrarse por código, me apoyaré en el proveedor de Terraform para Microsoft Fabric. Si alguna configuración del trial requiere pasos desde la interfaz gráfica, documentaré el supuesto, el procedimiento y la evidencia correspondiente.
+Para cubrir el requisito de Infraestructura como Código, usé **Terraform** como estrategia principal. En los recursos de Fabric que pueden administrarse por código, dejé una base preparada con el proveedor de Terraform para Microsoft Fabric. Cuando la capacidad Trial requirió pasos desde la interfaz gráfica, documenté el supuesto, el procedimiento y la evidencia correspondiente.
 
 ## Resumen ejecutivo
 
@@ -54,7 +54,7 @@ También tuve en cuenta la regla de desarrollar un único escenario de negocio y
 
 Infraestructura como Código, o IaC, consiste en definir recursos cloud mediante archivos versionados en vez de crearlos únicamente desde el portal. Esto permite que la infraestructura sea más reproducible, revisable y fácil de documentar.
 
-Para este proyecto usaré Terraform como estrategia principal de IaC. Esta decisión busca que la infraestructura no dependa únicamente de pasos manuales. En caso de que el trial de Fabric limite alguna automatización, documentaré la configuración realizada, la razón del supuesto y las evidencias necesarias.
+Para este proyecto usé Terraform como estrategia principal de IaC. Esta decisión busca que la infraestructura no dependa únicamente de pasos manuales. Cuando el trial de Fabric limitó alguna automatización, documenté la configuración realizada, la razón del supuesto y las evidencias necesarias.
 
 En la fase inicial identifiqué una limitación relevante: la capacidad Fabric Trial puede restringir algunas acciones de aprovisionamiento mediante el proveedor de Terraform. Por eso dejé una estructura Terraform preparada en `/infra`, pero configurada por defecto para no desplegar recursos hasta contar con una capacidad compatible. Esta decisión evita forzar un despliegue inestable y mantiene la infraestructura documentada de forma reproducible.
 
@@ -69,7 +69,7 @@ Durante el desarrollo voy a documentar los supuestos que tome para evitar ambig�
 - si reduzco volúmenes durante pruebas locales, dejaré la generación parametrizada para poder escalar a los volúmenes solicitados;
 - la documentación se construirá durante todo el proyecto y no solo al final.
 
-## Arquitectura propuesta
+## Arquitectura implementada
 
 La arquitectura seguirá el patrón Medallion:
 
@@ -100,11 +100,11 @@ Las tecnologías y herramientas usadas en el proyecto no cumplen todas el mismo 
 - DBeaver como cliente visual para revisar PostgreSQL y generar evidencias de consultas.
 - Visual Studio Code como editor de código y documentación.
 - PowerShell como consola principal de ejecución local.
-- Git para control de versiones local y GitHub como plataforma prevista para la entrega del repositorio.
+- Git para control de versiones local y GitHub como plataforma de entrega del repositorio.
 - GitHub Actions como validación CI/CD básica para revisar sintaxis, configuración y Terraform.
 - Parquet y Delta Lake como formatos analíticos considerados para las capas del Lakehouse.
 
-## Estructura inicial del repositorio
+## Estructura del repositorio
 
 La estructura base del repositorio es:
 
@@ -155,9 +155,9 @@ Además de las carpetas recomendadas por el enunciado, mantengo algunos archivos
 - `.github/workflows/validacion.yml`: define una validación CI/CD básica para revisar sintaxis de Python, archivos YAML y configuración Terraform antes de integrar cambios.
 - `infra/.terraform.lock.hcl`: fija las versiones del proveedor de Terraform para que futuras ejecuciones usen la misma selección de dependencias. No contiene estado ni credenciales.
 
-## Estado actual
+## Estado final de la solución
 
-El proyecto ya cuenta con una primera versión funcional del flujo Medallion: escenario de negocio definido, plataforma seleccionada, estructura del repositorio, configuración local de PostgreSQL, base Terraform en `/infra`, workspace de Fabric, Lakehouse principal y capas Bronze, Silver y Gold ejecutadas en Microsoft Fabric.
+El proyecto queda con una versión funcional del flujo Medallion: escenario de negocio definido, plataforma seleccionada, estructura del repositorio, configuración local de PostgreSQL, base Terraform en `/infra`, workspace de Fabric, Lakehouse principal, capas Bronze, Silver y Gold ejecutadas en Microsoft Fabric, orquestación visual y evidencias de validación.
 
 En Microsoft Fabric se creó el workspace `ws_retailmax_data_dev` y el Lakehouse `lh_retailmax_medallion`, que será utilizado para organizar las capas Bronze, Silver y Gold.
 
@@ -190,8 +190,8 @@ El estado resumido de las capas es:
 | Silver | Completado | Datos limpios, tipados, validados y con reglas de calidad |
 | Gold | Completado | Modelo analítico con dimensiones, hechos y KPIs |
 | Orquestación | Completada | DAG documentado y pipeline visual ejecutado correctamente en Fabric |
-| Documentación técnica | En avance | Arquitectura, catálogo de datos y modelo entidad-relación documentados |
-| CI/CD | Definido | Workflow de GitHub Actions para validaciones básicas |
-| Evidencias | En preparación | Guía de capturas y validaciones en `/docs/evidencias` |
+| Documentación técnica | Completada | Arquitectura, catálogo de datos, modelo entidad-relación y diario técnico documentados |
+| CI/CD | Completado | Workflow de GitHub Actions ejecutado correctamente |
+| Evidencias | Completadas | Capturas y validaciones organizadas en `/docs/evidencias` |
 
-Con este avance, el siguiente paso del proyecto es realizar la revisión final de documentación, video de demostración y entrega del repositorio.
+Con este cierre, la solución queda lista para sustentación y entrega mediante el repositorio GitHub.

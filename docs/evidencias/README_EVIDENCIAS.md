@@ -45,11 +45,9 @@ Dejé dos consultas listas para tomar evidencias sin escribirlas desde cero:
 - Debe estar relacionada con un punto de la solución: fuente, Bronze, Silver, Gold, orquestación, IaC o CI/CD.
 - Si una captura muestra un error corregido, solo se debe incluir si ayuda a explicar una decisión técnica. Para la entrega final priorizo capturas de ejecución correcta.
 
-## Evidencias pendientes
+## Estado de evidencias
 
-- Capturas limpias de Fabric para Bronze, Silver y Gold.
-- Captura de GitHub Actions después de subir el repositorio.
-- Captura de orquestación visual en Fabric si se crea el pipeline desde la interfaz.
+Al cierre de esta versión no dejo evidencias críticas pendientes. Si durante la revisión final se genera una nueva ejecución del pipeline o del workflow, puedo reemplazar las capturas por versiones más recientes.
 
 ## Evidencias capturadas
 
@@ -65,3 +63,4 @@ Dejé dos consultas listas para tomar evidencias sin escribirlas desde cero:
 | `docs/evidencias/capturas/07a_fabric_validacion_gold_conteos_kpis.png` | Capturada | Muestra conteos correctos de Gold y resumen de KPIs principales. |
 | `docs/evidencias/capturas/07b_fabric_validacion_gold_cierre.png` | Capturada | Muestra KPIs de inventario y mensaje de validación Gold finalizada correctamente. |
 | `docs/evidencias/capturas/08_fabric_orquestacion_pipeline.png` | Capturada | Muestra el pipeline visual `pl_retailmax_medallion` ejecutado correctamente con actividades Bronze, Silver y Gold. |
+| `docs/evidencias/capturas/09_github_actions_validacion.png` | Capturada | Muestra el workflow de GitHub Actions finalizado correctamente sobre la rama `main`. |

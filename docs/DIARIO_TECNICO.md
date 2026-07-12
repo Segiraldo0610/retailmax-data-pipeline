@@ -286,7 +286,7 @@ Decidí separar dimensiones, hechos y KPIs porque facilita el consumo analítico
 
 Finalmente ejecuté la validación de Gold. Esta validación confirma que las tablas analíticas existen, tienen registros y contienen las métricas esperadas para el escenario Retail.
 
-Con Gold funcionando, el proyecto ya cuenta con un flujo completo desde generación de datos hasta tablas analíticas. El siguiente paso es cerrar la orquestación, reforzar evidencias y dejar la documentación lista para entrega.
+Con Gold funcionando, el proyecto ya cuenta con un flujo completo desde generación de datos hasta tablas analíticas. A partir de ese punto enfoqué el trabajo en orquestación, evidencias y cierre documental.
 
 ### Cierre del día
 
@@ -330,7 +330,7 @@ También definí una política simple de reintentos: un reintento por actividad,
 
 ### Supuesto de Fabric Trial
 
-Como estoy trabajando sobre una capacidad Trial, dejé versionada la definición del pipeline en el repositorio. Si el entorno permite exportar el pipeline desde Fabric, esa evidencia se puede anexar en `/docs`. Si no lo permite, la definición YAML y el README de orquestación dejan claro cómo se debe construir el flujo dentro de la interfaz.
+Como estoy trabajando sobre una capacidad Trial, dejé versionada la definición del pipeline en el repositorio y materialicé la orquestación visual desde la interfaz de Fabric. Esta decisión me permite demostrar la ejecución ordenada del flujo sin depender de una exportación automática del pipeline, que puede variar según las opciones disponibles en el trial.
 
 ### Documentación de arquitectura y datos
 
@@ -373,7 +373,7 @@ La ejecución terminó correctamente en las tres actividades. Con esto dejé evi
 
 ### Cierre del día
 
-Al finalizar este bloque quedó definida la orquestación lógica del pipeline:
+Al finalizar este bloque quedó implementada, documentada y evidenciada la orquestación del pipeline:
 
 - orquestador seleccionado: Microsoft Fabric Data Factory Pipelines;
 - DAG documentado en YAML;
